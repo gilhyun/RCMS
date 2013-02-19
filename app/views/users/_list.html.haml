@@ -1,0 +1,23 @@
+%h3 사용자 리스트
+
+%table.table.table-condensed.table-hover
+  %tr{align:"center"}
+    %th 사용자ID
+    %th EMAIL
+    %th 관리자여부
+    %th 작업
+
+  - @users.each do |user|
+    %tr
+      %td= user.userid
+      %td= user.email
+      %td= user.admin
+      %td
+        = link_to '보기', user , remote:true , class:"btn btn-mini"
+        = link_to '수정', edit_user_path(user) , remote:true , class:"btn btn-mini"
+        = link_to '삭제', user, method: :delete, data: { confirm: "#{user.userid} 삭제 하시겠습니까?" } , class:"btn btn-mini"
+
+.navigation
+  = paginate @users , remote:true
+
+= link_to 'New User', new_user_path , remote:true

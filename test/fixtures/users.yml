@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+<% 1.upto(20) do |inx| %>
+u<%=inx%>:
+  userid: zczczc<%=inx%>
+  email: railsdev71@gmail.com<%=inx%>
+  admin: <%= rand() > 0.5 ? "true":"false" %>
+  password: password
+  salt: salt
+
+<% end %>
