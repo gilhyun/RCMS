@@ -1,1 +1,1 @@
-$("#rcms-main").html("<%= j(render partial:"#{@partial_page}") %>");
+$("#rcms-main").html("<%= j(render partial:"#{page}") %>");

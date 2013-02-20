@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  #respond_to :html , :js
   
   def index
     @users = User.order("updated_at desc").page(params[:page])
@@ -8,19 +7,14 @@ class UsersController < ApplicationController
     respond_to do |format|
 
       #
-      #
       # render partial:"list" 하면 layout 없이 그려진다.
       # 아래처럼 render "_list" 하면 제대로 그려진다.. 차이가 뭘까 ??
       # rendering이 생각보다 복잡해보인다.
       #
-      #
-      #
-
       format.html { render "_list"}
-      @partial_page="list"
       # js 응답이므로 ajax.js.coffee를 찾을것이다. 
       # ajax.js.coffer를 다 적으면 deprecation warning이 로그에 나온다.
-      format.js{ render "ajax" } 
+      format.js{ render "ajax" , locals:{page:"list"} } 
     end
   end
 
@@ -29,8 +23,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html{ render "_show" }
-      @partial_page="show"
-      format.js{ render "ajax" }
+      format.js{ render "ajax" , locals:{page:"show"} } 
     end
 
   end
@@ -40,8 +33,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html{ render "_form"}
-      @partial_page="form"
-      format.js{ render "ajax"}
+      format.js{ render "ajax", locals:{page:"form"} } 
     end
   end
 
@@ -50,8 +42,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       format.html{ render "_form"}
-      @partial_page="form"
-      format.js{ render "ajax" }
+      format.js{ render "ajax", locals:{page:"form"} } 
     end
   end
 
@@ -63,8 +54,7 @@ class UsersController < ApplicationController
         format.html { redirect_to users_path }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        @partial_page="form"
-        format.js{ render "ajax"}
+        format.js{ render "ajax", locals:{page:"form"} } 
       end
     end
   end
@@ -77,8 +67,7 @@ class UsersController < ApplicationController
         format.html { redirect_to users_path}
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        @partial_page="form"
-        format.js{ render "ajax"}
+        format.js{ render "ajax", locals:{page:"form"} } 
       end
     end
   end

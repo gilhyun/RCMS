@@ -11,7 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218135925) do
+ActiveRecord::Schema.define(:version => 20130220045320) do
+
+  create_table "attachfiles", :force => true do |t|
+    t.integer  "document_id", :null => false
+    t.string   "filename",    :null => false
+    t.string   "filepath"
+    t.integer  "filesize",    :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "user_id",     :null => false
+    t.integer  "document_id", :null => false
+    t.integer  "version",     :null => false
+    t.text     "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "documents", :force => true do |t|
+    t.integer  "user_id",                          :null => false
+    t.integer  "attachfile_id",                    :null => false
+    t.integer  "groupid",                          :null => false
+    t.integer  "version",                          :null => false
+    t.boolean  "published",     :default => false
+    t.string   "title",                            :null => false
+    t.text     "content"
+    t.integer  "readcount",     :default => 0
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "userid"
