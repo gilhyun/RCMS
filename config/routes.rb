@@ -1,5 +1,10 @@
 RCMS::Application.routes.draw do
+  
   resources :users
+
+  resources :documents
+
+  match "attachfile-upload" => "documents#upload"
 
 
   # The priority is based upon order of creation:

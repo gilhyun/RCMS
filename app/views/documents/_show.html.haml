@@ -1,0 +1,14 @@
+%p#notice= notice
+
+%p
+  %b title:
+  = @document.title
+
+  %br
+
+  %b content:
+  = @document.content
+
+= link_to 'Edit', edit_document_path(@document) , remote:true
+\|
+= link_to 'Back', documents_path , remote:true

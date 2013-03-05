@@ -15,14 +15,18 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          %button.btn.btn-navbar{ type:"button" , data:{toggle:"collapse", target:".nav-collapse"} }
+          %button.btn.btn-navbar{ type:"button" , data:{toggle:"collapse", target:"#topmenu"} }
             %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          %button.btn.btn-navbar{ type:"button" , data:{toggle:"collapse", target:"#sidebar"} }
             %span.icon-bar
             %span.icon-bar
 
           = link_to "RCMS", users_path , class:"brand"
 
-          .nav-collapse.collapse
+          #topmenu.nav-collapse
             %ul.nav
               %li
                 %a{href:"#"} Home1
@@ -38,8 +42,9 @@
                 %a{href:"#"} Home6
 
     .container
+
       .row
-        .span3
+        #sidebar.span3.nav-collapse
           = render "admin/sidebar"
 
         #rcms-main.span9
