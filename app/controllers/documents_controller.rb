@@ -2,7 +2,9 @@ class DocumentsController < ApplicationController
 
   
   def index
-    @documents = Document.order("updated_at desc").page(params[:page])
+    @documents = Document.list_updated(params[:page])
+
+    puts session
 
     respond_to do |format|
 
@@ -84,8 +86,11 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
-      format.html { redirect_to documents_url }
-      format.json { head :no_content }
+      #방법1 - 화면전체가 refresh될것이다.
+      #format.js { render js: "window.location='#{documents_url}'"}
+      #방법2
+      @documents = Document.list_updated(params[:page])
+      format.js{ render "ajax", locals:{page:"list"} } 
     end
   end
 

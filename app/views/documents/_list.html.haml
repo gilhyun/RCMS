@@ -2,10 +2,10 @@
 
 %table.table.table-condensed.table-hover
   %tr{align:"center"}
-    %th 제목
-    %th 작성자
-    %th 수정일
-    %th
+    %th{width:"55%"} 제목
+    %th{width:"15%"} 작성자
+    %th{width:"15%"} 수정일
+    %th{width:"15%"} 작업
 
   - @documents.each do |document|
     %tr
@@ -13,11 +13,19 @@
       %td= document.user_id
       %td= document.updated_at.strftime("%Y%m%d")
       %td
-        = link_to '', document , remote:true , class:"icon-play" , alt:"보기"
-        = link_to '', edit_document_path(document) , remote:true , class:"icon-edit"
-        = link_to '', document, method: :delete, data: { confirm: "#{document.title} 삭제 하시겠습니까?" } , class:"icon-remove"
+        = link_to '', document , remote:true , class:"icon-play" , data:{ toggle:"tooltip" , placement:"left" , title:"보기" }
+        
+        = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+        
+        = link_to '', document, method:"delete", remote:true , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
-.navigation
-  = paginate @documents , remote:true
+= paginate @documents , remote:true
 
 = link_to 'New Document', new_document_path , remote:true
+
+:javascript
+  $(function(){
+    $(".icon-play").tooltip();
+    $(".icon-edit").tooltip();
+    $(".icon-remove").tooltip();
+  })

@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-<% 1.upto(20) do |inx| %>
+<% 1.upto(200) do |inx| %>
 d<%=inx%>:
   user_id: Fixtures.identify(:u1)
   attachfile_id: 1
