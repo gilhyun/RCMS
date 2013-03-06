@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130305022950) do
+ActiveRecord::Schema.define(:version => 20130306152211) do
 
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(:version => 20130305022950) do
     t.integer  "readcount",     :default => 0
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "tmpfiles", :force => true do |t|
+    t.string   "ufilename"
+    t.string   "ufilepath"
+    t.string   "filename"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "time_token"
   end
 
   create_table "users", :force => true do |t|

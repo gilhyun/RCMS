@@ -4,8 +4,6 @@ class DocumentsController < ApplicationController
   def index
     @documents = Document.list_updated(params[:page])
 
-    puts session
-
     respond_to do |format|
 
       #
@@ -60,6 +58,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
+        @document.with_attachfiles(params["time-token"])
         format.html { redirect_to documents_path }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
@@ -96,7 +95,16 @@ class DocumentsController < ApplicationController
 
   def upload
 
-    puts params
+    tmpfile=Tmpfile.new
+
+    tmpfile.ufilename=File.basename(params["our-file"].tempfile)
+    tmpfile.ufilepath=File.dirname(params["our-file"].tempfile)
+    tmpfile.filename=File.basename(params["our-file"].original_filename)
+    tmpfile.time_token=params["time-token"]
+
+    tmpfile.save!
+
+    
 
     respond_to do |format|
       format.all{ render nothing:true}

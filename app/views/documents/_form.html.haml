@@ -10,17 +10,26 @@
   /.field
   /  = f.label :content
   /  = f.text_field :content
-  %textarea#document-content.input-xxlarge{name:"document[content]"}
+  %textarea#document-content.input-xxlarge{name:"document[content]", rows:"15"}
     = @document.content
 
+  
+  /
+  / attach file time token
+  /
+  %input#time-token{type:"hidden" , name:"time-token" , value:"#{Time.now.to_i}"}
+
+  / 
+  / TODO  ::
+  /
   %br
   -@user=User.first
   %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@user.id}
 
 
 
-  %p#support-notice
-    Your browser does not support Ajax uploads :-(<br/>The form will be submitted as normal.
+  /%p#support-notice
+  /  Your browser does not support Ajax uploads :-(<br/>The form will be submitted as normal.
 
   %a#file-choose.btn.btn-mini 파일선택
 
@@ -48,23 +57,17 @@
   = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
   
 :javascript
+//https://github.com/newbamboo/example-ajax-upload
   $(function(){
 
     $("#file-id").css("visibility","hidden");
 
+      // web editor
       $('#document-content').wysiwyg({
-
-        //resizeOptions: {autoGrow:true},
-
-        //controls: {
-        //  html: { visible: true }
-        //}
-
       });
 
       $("#file-choose").click(function(){
         $("#file-id").click();
-
       });
 
   });
@@ -87,6 +90,8 @@
 
         var formdata=new FormData();
         formdata.append("our-file",file);
+        // identify temp file value - Time.now
+        formdata.append("time-token",$("#time-token").val() );
 
         upload_file_list[index]=formdata;
 
@@ -97,11 +102,6 @@
     $("#li"+fid).remove();
     upload_file_list[inx]=null;
   }
-
-  // $("a[id^='fnum']").click(function(){
-  //   //alert($(this).attr("id"));
-  //   //$("li[id="+this.id+"]").remove();
-  // });
 
   // Function that will allow us to know if Ajax uploads are supported
   function supportAjaxUploadWithProgress() {
@@ -128,11 +128,9 @@
 
   // Actually confirm support
   if (supportAjaxUploadWithProgress()) {
-    // Ajax uploads are supported!
-    // Change the support message and enable the upload button
-    var notice = document.getElementById('support-notice');
+    //var notice = document.getElementById('support-notice');
+    //notice.innerHTML = "Your browser supports HTML uploads. Go try me! :-)";
     var uploadBtn = document.getElementById('upload-button-id');
-    notice.innerHTML = "Your browser supports HTML uploads. Go try me! :-)";
     uploadBtn.removeAttribute('disabled');
 
     // Init the Ajax form submission
@@ -176,29 +174,12 @@
       }
 
 
-
-
-
-
-
-
       for(var ii=0;ii<upload_file_list.length;ii++){
         if(upload_file_list[ii] != null){
           sendXHRequest(upload_file_list[ii], action);
         }
 
       }
-
-
-
-      
-
-      
-      //formData.append('our-file', file);
-
-      // Code common to both variants
-      //sendXHRequest(formData, action);
-
 
     }
   }
