@@ -1,25 +1,24 @@
 %p#notice= notice
 
-%p
-  %b title:
+%h4
   = @document.title
+%p.pull-right.icon-file
 
-  %br
+%br
+%hr
 
-  %b content:
+%h5
   = @document.content.html_safe
-  
-  %br
-  %br
+%hr
 
-  - if @document.attachfiles.length > 0
-    %b files:
-    -@document.attachfiles.each do |file|
-      %br= file.filename
+- if @document.attachfiles.length > 0
 
-= link_to 'Edit', edit_document_path(@document) , remote:true
-\|
-= link_to 'Back', documents_path , remote:true
+  %b 첨부파일
+  -@document.attachfiles.each do |file|
+    %br= file.filename
+
+= link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
+= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 
 = form_for [@document, Comment.new], remote:true  do |f|
@@ -33,7 +32,7 @@
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
 
-  %input.input-xlarge{name:"comment[content]"}
+  %input.input-xxlarge{name:"comment[content]" , placeholder:"Comment ... "}
   = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
 
 

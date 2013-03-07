@@ -95,17 +95,19 @@
 
   function addToFileList(file){
     var fid="fnum"+index;
-        var appendString="<li id='li"+fid+"'>"+file.name+"  <a id='"+fid+"' href='#' onClick=\"removeFile('"+fid+"',"+index+");\">X</a></li>"
-        $("#fileinfo").append(appendString);
 
-        var formdata=new FormData();
-        formdata.append("our-file",file);
-        // identify temp file value - Time.now
-        formdata.append("time-token",$("#time-token").val() );
+    var appendString="<li id='li"+fid+"'>"+file.name+"  <a id='"+fid+"' href='#' onClick=\"removeFile('"+fid+"',"+index+");\">X</a></li>"
+    
+    $("#fileinfo").append(appendString);
 
-        upload_file_list[index]=formdata;
+    var formdata=new FormData();
+    formdata.append("our-file",file);
+    // identify temp file value - Time.now
+    formdata.append("time-token",$("#time-token").val() );
 
-        index++;
+    upload_file_list[index]=formdata;
+
+    index++;
   }
 
   function removeFile(fid,inx){
@@ -178,11 +180,6 @@
       // FormData only has the file
       var fileInput = document.getElementById('file-id');
       var file = fileInput.files;
-
-      for(var i=0;i<file.length;i++){
-        //alert(file[i].name);
-      }
-
 
       for(var ii=0;ii<upload_file_list.length;ii++){
         if(upload_file_list[ii] != null){

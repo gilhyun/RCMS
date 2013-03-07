@@ -12,3 +12,10 @@ en:
           attributes:
             userid:
               blank: "를 입력해야 합니다."
+  views:
+    pagination:
+      first: "&lt;&lt"
+      last: "&gt;&gt"
+      previous: "&lt;"
+      next: "&gt"
+      truncate: "..."
