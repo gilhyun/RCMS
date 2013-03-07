@@ -1,0 +1,1 @@
+$("#comment-lists").html("<%= j(render partial:"comments") %>");

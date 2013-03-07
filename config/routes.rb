@@ -2,7 +2,9 @@ RCMS::Application.routes.draw do
   
   resources :users
 
-  resources :documents
+  resources :documents do
+    resources :comments
+  end
 
   match "attachfile-upload" => "documents#upload"
 

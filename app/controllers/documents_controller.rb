@@ -20,6 +20,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
+    @comments=@document.comments.list_updated(params[:page])
 
     respond_to do |format|
       format.html{ render "_show" }
@@ -78,7 +79,7 @@ class DocumentsController < ApplicationController
         # 신규추가된 upload file
         Attachfile.save_files(@document,params["time-token"])
 
-        # 유저가 삭제하는 이미 첨부된 목록
+        # 첨부된 파일중 삭제할것 
         Attachfile.update_files(params[:attachfiles])
 
         format.html { redirect_to documents_path}

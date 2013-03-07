@@ -7,7 +7,7 @@
   %br
 
   %b content:
-  = @document.content
+  = @document.content.html_safe
   
   %br
   %br
@@ -20,3 +20,23 @@
 = link_to 'Edit', edit_document_path(@document) , remote:true
 \|
 = link_to 'Back', documents_path , remote:true
+
+
+= form_for [@document, Comment.new], remote:true  do |f|
+
+  / 
+  / TODO  ::
+  /
+  %br
+  -@user=User.first
+  %input{type:"hidden" , name:"comment[user_id]" , value:@user.id}
+  %input{type:"hidden" , name:"comment[version]" , value:"0"}
+
+
+  %input.input-xlarge{name:"comment[content]"}
+  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+
+
+%div#comment-lists
+  =render partial:"comments/comments"
+  

@@ -1,0 +1,7 @@
+%h5 Comments
+
+- @comments.each do |comment|
+  %br= comment.content
+
+= paginate @comments , remote:true
+      
