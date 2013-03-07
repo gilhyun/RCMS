@@ -2,8 +2,18 @@
 
 %h4
   = @document.title
-%p.pull-right.icon-file
 
+/ bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
+/ $('#file-lists').popover({ html : true });
+- if @document.attachfiles.size > 0
+  -file_str=""
+  -@document.attachfiles.each do |attachfile|
+    -file_str +="<p><a href=''>#{attachfile.filename}</a></p>"
+
+  %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"#{file_str}" , title:"파일목록"}}
+    첨부파일
+
+/<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover on top">Popover on top</a>
 %br
 %hr
 
@@ -11,14 +21,9 @@
   = @document.content.html_safe
 %hr
 
-- if @document.attachfiles.length > 0
-
-  %b 첨부파일
-  -@document.attachfiles.each do |file|
-    %br= file.filename
-
-= link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
-= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
+= link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini pull-right"
+&nbsp;&nbsp;
+= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini pull-right"
 
 
 = form_for [@document, Comment.new], remote:true  do |f|
@@ -39,3 +44,7 @@
 %div#comment-lists
   =render partial:"comments/comments"
   
+:javascript
+  $(function(){
+    $('#file-lists').popover({ html : true });
+  });

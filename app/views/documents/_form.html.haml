@@ -4,12 +4,9 @@
       - @document.errors.full_messages.each do |msg|
         %li.text-error= msg
 
-  .field
-    = f.label :title
-    = f.text_field :title
-  /.field
-  /  = f.label :content
-  /  = f.text_field :content
+  = f.label "제목"
+  = f.text_field :title , class:"input-xxlarge"
+  = f.label "내용"
   %textarea#document-content.input-xxlarge{name:"document[content]", rows:"15"}
     = @document.content
 
@@ -46,7 +43,7 @@
   /The file to upload
   %input#file-id{ type:"file", name:"our-file[]", multiple:""}
 
-  #fileinfo
+  %div#fileinfo
 
   /Also by default, we disable the upload button.
   /If Ajax uploads are supported we'll enable it.
@@ -63,8 +60,8 @@
   %br
 
   
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
-  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
+  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini pull-right"
+  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini pull-right"
   
 :javascript
 //https://github.com/newbamboo/example-ajax-upload
@@ -87,10 +84,11 @@
 
   $("#file-id").bind("change",function(){
     var fileInput = document.getElementById('file-id');
-      var files = fileInput.files;
-      for(var i=0;i<files.length;i++){
-        addToFileList(files[i]);
-      }
+    var files = fileInput.files;
+    for(var i=0;i<files.length;i++){
+      addToFileList(files[i]);
+    }
+    $("#upload-button-id").click();
   });
 
   function addToFileList(file){

@@ -19,7 +19,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    @document = Document.find(params[:id])
+    @document=Document.show(params)
     @comments=@document.comments.list_updated(params[:page])
 
     respond_to do |format|

@@ -1,8 +1,11 @@
 %h5 Comments
-%table.table.table-condensed
-  - @comments.each do |comment|
-    %tr
-      %td= comment.content
+- @comments.each do |comment|
+  %hr= comment.content
+  %p
+    %small.muted.pull-right
+      = comment.user_id
+      &nbsp;&nbsp;
+      = comment.updated_at
 
 = paginate @comments , remote:true
       
