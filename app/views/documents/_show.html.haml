@@ -8,6 +8,14 @@
 
   %b content:
   = @document.content
+  
+  %br
+  %br
+
+  - if @document.attachfiles.length > 0
+    %b files:
+    -@document.attachfiles.each do |file|
+      %br= file.filename
 
 = link_to 'Edit', edit_document_path(@document) , remote:true
 \|

@@ -6,9 +6,9 @@ class Document < ActiveRecord::Base
   has_many :attachfiles
   has_many :comments
 
-  paginates_per 10
+  paginates_per 5
 
   def self.list_updated(page)
-  	Document.order("updated_at desc").page(page)
+  	Document.includes(:attachfiles).order("updated_at desc").page(page)
   end
 end

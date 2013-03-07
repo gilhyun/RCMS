@@ -58,7 +58,9 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.save
-        @document.with_attachfiles(params["time-token"])
+
+        # 유저가 추가한 첨부파일 
+        Attachfile.save_files(@document,params["time-token"])
         format.html { redirect_to documents_path }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
@@ -72,6 +74,13 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
+
+        # 신규추가된 upload file
+        Attachfile.save_files(@document,params["time-token"])
+
+        # 유저가 삭제하는 이미 첨부된 목록
+        Attachfile.update_files(params[:attachfiles])
+
         format.html { redirect_to documents_path}
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
@@ -99,6 +108,7 @@ class DocumentsController < ApplicationController
 
     tmpfile.ufilename=File.basename(params["our-file"].tempfile)
     tmpfile.ufilepath=File.dirname(params["our-file"].tempfile)
+    tmpfile.filesize=File.size(params["our-file"].tempfile)
     tmpfile.filename=File.basename(params["our-file"].original_filename)
     tmpfile.time_token=params["time-token"]
 

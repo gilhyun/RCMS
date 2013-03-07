@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306152211) do
+ActiveRecord::Schema.define(:version => 20130307032608) do
 
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20130306152211) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "time_token"
+    t.integer  "filesize"
   end
 
   create_table "users", :force => true do |t|

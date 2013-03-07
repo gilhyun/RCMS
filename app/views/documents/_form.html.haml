@@ -19,6 +19,16 @@
   /
   %input#time-token{type:"hidden" , name:"time-token" , value:"#{Time.now.to_i}"}
 
+  /
+  / already file exist info
+  /
+
+  -@document.attachfiles.each_with_index do |af,inx|
+    %p
+      = check_box_tag "attachfiles[file_#{inx}]", af.id
+      = af.filename
+
+
   / 
   / TODO  ::
   /
