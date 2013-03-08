@@ -3,10 +3,14 @@ RCMS::Application.routes.draw do
   resources :users
 
   resources :documents do
+    member do
+      get :attachfile_download
+    end
     resources :comments
   end
 
   match "attachfile-upload" => "documents#upload"
+  #match 'documents/:id/attachfile_download' => "documents#attachfile_download"
 
 
   # The priority is based upon order of creation:

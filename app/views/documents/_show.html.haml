@@ -3,17 +3,21 @@
 %h4
   = @document.title
 
-/ bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
-/ $('#file-lists').popover({ html : true });
+=# bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
+=# $('#file-lists').popover({ html : true });
 - if @document.attachfiles.size > 0
-  -file_str=""
+  -file_str=[]
+  -download_path="#{Rails.root}#{ENV['UPLOAD_PATH']}"
   -@document.attachfiles.each do |attachfile|
-    -file_str +="<p><a href=''>#{attachfile.filename}</a></p>"
+    -file_url=File.join(download_path,@document.id.to_s,attachfile.id.to_s)
+    
+    - file_str << link_to("#{attachfile.filename}", action:'attachfile_download', params:{id:@document.id, attachfile_id:attachfile.id})
 
-  %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"#{file_str}" , title:"파일목록"}}
+  %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
     첨부파일
 
-/<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover on top">Popover on top</a>
+=# popover 예제.
+=#<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover on top">Popover on top</a>
 %br
 %hr
 

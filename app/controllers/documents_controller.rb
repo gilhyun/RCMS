@@ -3,7 +3,6 @@ class DocumentsController < ApplicationController
   
   def index
 
-puts upload_path
     @documents = Document.list_updated(params[:page])
 
     respond_to do |format|
@@ -82,7 +81,7 @@ puts upload_path
         Attachfile.save_files(@document,params["time-token"])
 
         # 첨부된 파일중 삭제할것 
-        Attachfile.update_files(params[:attachfiles])
+        Attachfile.update_files(@document,params[:attachfiles])
 
         format.html { redirect_to documents_path}
       else
@@ -105,6 +104,7 @@ puts upload_path
     end
   end
 
+  # 업로드 첨부파일정보 임시저장
   def upload
 
     tmpfile=Tmpfile.new
@@ -117,11 +117,16 @@ puts upload_path
 
     tmpfile.save!
 
-    
-
     respond_to do |format|
       format.all{ render nothing:true}
     end
+  end
 
+  # 첨부파일 다운로드
+  def attachfile_download
+    # 0: 파일명을 포함한 파일 전체경로
+    # 1: 파일명
+    finfo=Attachfile.download_filename(params)
+    send_file(finfo[0], filename:"#{finfo[1]}" , disposition:'attachment')
   end
 end
