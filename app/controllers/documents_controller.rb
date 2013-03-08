@@ -2,6 +2,8 @@ class DocumentsController < ApplicationController
 
   
   def index
+
+puts upload_path
     @documents = Document.list_updated(params[:page])
 
     respond_to do |format|
