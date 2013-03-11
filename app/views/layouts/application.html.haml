@@ -28,18 +28,19 @@
 
           #topmenu.nav-collapse
             %ul.nav
+              
               %li
-                %a{href:"#"} Home1
-              %li
-                %a{href:"#"} Home2
-              %li
-                %a{href:"#"} Home3
-              %li
-                %a{href:"#"} Home4
-              %li  
-                %a{href:"#"} Home5
-              %li  
-                %a{href:"#"} Home6
+                .input-append  
+                  %input.span2{type:"text", placeholder:"search..."}
+                  %span.add-on
+                    %i.icon-search
+              
+          - unless @current_user
+            %h6.pull-right= link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
+          - else
+            %h6.pull-right= link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
+            /%a.icon-user.icon-white{href:"#"}
+
 
     .container
 

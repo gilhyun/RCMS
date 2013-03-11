@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
+
     @current_user ||= User.find(session[:userid]) if session[:userid]
 
-    puts @current_user.id
-    puts @current_user.userid
+    redirect_to new_session_path unless @current_user
   end
 
   helper_method :current_user

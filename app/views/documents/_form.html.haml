@@ -88,7 +88,7 @@
     for(var i=0;i<files.length;i++){
       addToFileList(files[i]);
     }
-    $("#upload-button-id").click();
+    //$("#upload-button-id").click();
   });
 
   function addToFileList(file){
@@ -179,12 +179,15 @@
       var fileInput = document.getElementById('file-id');
       var file = fileInput.files;
 
-      for(var ii=0;ii<upload_file_list.length;ii++){
-        if(upload_file_list[ii] != null){
-          sendXHRequest(upload_file_list[ii], action);
-        }
-
+      for(var i=0;i<file.length;i++){
+        sendXHRequest(file[i], action);
       }
+
+      // for(var ii=0;ii<upload_file_list.length;ii++){
+      //   if(upload_file_list[ii] != null){
+      //     sendXHRequest(upload_file_list[ii], action);
+      //   }
+      // }
 
     }
   }

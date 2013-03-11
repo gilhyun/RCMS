@@ -1,6 +1,6 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :admin, :email, :userid
+  attr_accessible :admin, :email, :userid, :password
   
   has_secure_password
   

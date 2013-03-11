@@ -2,10 +2,20 @@
 class SessionsController < ApplicationController
   
 
+  # login ui
   def new
 
+    if params[:cmd]=="login"
+    end
+
+    if params[:cmd]=="logout"
+      session[:userid]=nil
+    end
+
+    render "new"
   end
 
+  #login 체크
   def create
     user = User.find_by_userid(params[:userid])
 
@@ -17,7 +27,6 @@ class SessionsController < ApplicationController
     #   u.save
     # end
 
-
     if user && user.authenticate(params[:password])
       session[:userid] = user.id
       redirect_to documents_url, :notice => "Logged in!"
@@ -25,6 +34,6 @@ class SessionsController < ApplicationController
       flash.now.alert = "아이디, 패스워드가 잘못 입력되었습니다."
       render "new"
     end
-
   end
+
 end

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  before_filter :current_user
   
   def index
     @users = User.order("updated_at desc").page(params[:page])

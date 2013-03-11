@@ -1,9 +1,8 @@
 class DocumentsController < ApplicationController
 
+  before_filter :current_user
   
   def index
-
-    current_user
 
     @documents = Document.list_updated(params[:page])
 
