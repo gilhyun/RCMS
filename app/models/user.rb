@@ -1,6 +1,8 @@
 # encoding: utf-8
 class User < ActiveRecord::Base
-  attr_accessible :admin, :email, :password, :salt, :userid
+  attr_accessible :admin, :email, :userid
+  
+  has_secure_password
   
   paginates_per 5 # kaminari paging parameter
 

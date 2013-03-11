@@ -3,6 +3,8 @@ class DocumentsController < ApplicationController
   
   def index
 
+    current_user
+
     @documents = Document.list_updated(params[:page])
 
     respond_to do |format|
@@ -96,11 +98,16 @@ class DocumentsController < ApplicationController
     @document.destroy
 
     respond_to do |format|
+      
       #방법1 - 화면전체가 refresh될것이다.
       #format.js { render js: "window.location='#{documents_url}'"}
-      #방법2
-      @documents = Document.list_updated(params[:page])
-      format.js{ render "ajax", locals:{page:"list"} } 
+
+      #방법2 - 삭제후 페이지 번호를 누르면 show action으로 처리된다.. - > 원인이 뭐지 ??
+      #@documents = Document.list_updated(params[:page])
+      #format.js{ render "ajax", locals:{page:"list"} } 
+      
+      #방법3 - 제일 무난한 방법인것 같다.
+      format.all{ redirect_to documents_path}
     end
   end
 

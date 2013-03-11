@@ -13,11 +13,21 @@
       %td= user.email
       %td= user.admin
       %td
-        = link_to '보기', user , remote:true , class:"btn btn-mini"
-        = link_to '수정', edit_user_path(user) , remote:true , class:"btn btn-mini"
-        = link_to '삭제', user, method: :delete, data: { confirm: "#{user.userid} 삭제 하시겠습니까?" } , class:"btn btn-mini"
+        = link_to '', user , remote:true , class:"icon-play" , data:{ toggle:"tooltip" , placement:"left" , title:"보기" }
+        
+        = link_to '', edit_user_path(user) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+        
+        = link_to '', user, method:"delete", class:"icon-remove" , data: { confirm: "#{user.userid} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
+
 
 .navigation
   = paginate @users , remote:true
 
 = link_to 'New User', new_user_path , remote:true
+
+:javascript
+  $(function(){
+    $(".icon-play").tooltip();
+    $(".icon-edit").tooltip();
+    $(".icon-remove").tooltip();
+  })

@@ -1,0 +1,15 @@
+%h3 Log in
+
+-if flash[:alert]
+  .alert.alert-error= flash[:alert]
+
+= form_tag sessions_path  do
+  .field
+    = label_tag "ID"
+    = text_field_tag :userid, params[:userid]
+
+  .field  
+    = label_tag :password
+    = password_field_tag :password
+  
+  = submit_tag "Log in" , class:"btn btn-primary"

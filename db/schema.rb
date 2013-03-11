@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307032608) do
+ActiveRecord::Schema.define(:version => 20130311075519) do
 
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
@@ -65,10 +65,9 @@ ActiveRecord::Schema.define(:version => 20130307032608) do
     t.string   "userid"
     t.string   "email"
     t.boolean  "admin"
-    t.string   "password"
-    t.string   "salt"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
   end
 
 end
