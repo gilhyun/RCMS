@@ -29,224 +29,91 @@
   %br
   %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@current_user.id}
 
-
-
-  /%p#support-notice
-  /  Your browser does not support Ajax uploads :-(<br/>The form will be submitted as normal.
-
-  %a#file-choose.btn.btn-mini 파일선택
-
-  /The file to upload
-  %input#file-id{ type:"file", name:"our-file[]", multiple:""}
-
-  %div#fileinfo
-
-  /Also by default, we disable the upload button.
-  /If Ajax uploads are supported we'll enable it.
-  %input#upload-button-id.btn-primary.btn-mini{type:"button", value:"Upload", disabled:"disabled"}
-
-  
-
-  %br
-
-  %p#upload-status
-  %p#progress
-  %pre#result
-
   %br
 
   .btn-group.pull-right
     = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
     = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
-  
+
+
+
+%button#fine-uploader-basic.btn.btn-primary.btn-mini UPLOAD
+#messages
+
+%br
+%br
+
 :javascript
-//https://github.com/newbamboo/example-ajax-upload
+   $(function(){
 
-  $.ajaxSetup({
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-    }
-  }); 
 
-  $(function(){
+    // web editor
+    $('#document-content').wysiwyg({
+    });
 
-    $("#file-id").css("visibility","hidden");
 
-      // web editor
-      $('#document-content').wysiwyg({
-      });
+    var fub = $('#fine-uploader-basic');
+    var messages = $('#messages');
+ 
+    var uploader = new qq.FineUploaderBasic({
+      button: fub[0],
+      request: {
+        endpoint: "/attachfile-upload"
+      },
+      // validation: {
+      //   allowedExtensions: ['jpeg', 'jpg', 'gif', 'png'],
+      //   sizeLimit: 204800 // 200 kB = 200 * 1024 bytes
+      // },
+      callbacks: {
+        onSubmit: function(id, fileName) {
+          messages.append('<div id="file-' + id + '" class="alert" style="margin: 20px 0 0"></div>');
+          uploader.setParams({
 
-      $("#file-choose").click(function(){
-        $("#file-id").click();
-      });
+            authenticity_token: "#{form_authenticity_token.to_s}",
+            time_token: $("#time-token").val() 
 
-  });
-
-  var upload_file_list=[];
-  var index=0;
-
-  $("#file-id").bind("change",function(){
-    var fileInput = document.getElementById('file-id');
-    var files = fileInput.files;
-    for(var i=0;i<files.length;i++){
-      addToFileList(files[i]);
-    }
-    //$("#upload-button-id").click();
-  });
-
-  function addToFileList(file){
-    var fid="fnum"+index;
-
-    var appendString="<li id='li"+fid+"'>"+file.name+"  <a id='"+fid+"' href='#' onClick=\"removeFile('"+fid+"',"+index+");\">X</a></li>"
-    
-    $("#fileinfo").append(appendString);
-
-    var formdata=new FormData();
-    formdata.append("our-file",file);
-    // identify temp file value - Time.now
-    formdata.append("time-token",$("#time-token").val() );
-
-    upload_file_list[index]=formdata;
-
-    index++;
-  }
-
-  function removeFile(fid,inx){
-    $("#li"+fid).remove();
-    upload_file_list[inx]=null;
-  }
-
-  // Function that will allow us to know if Ajax uploads are supported
-  function supportAjaxUploadWithProgress() {
-    return supportFileAPI() && supportAjaxUploadProgressEvents() && supportFormData();
-
-    // Is the File API supported?
-    function supportFileAPI() {
-      var fi = document.createElement('INPUT');
-      fi.type = 'file';
-      return 'files' in fi;
-    };
-
-    // Are progress events supported?
-    function supportAjaxUploadProgressEvents() {
-      var xhr = new XMLHttpRequest();
-      return !! (xhr && ('upload' in xhr) && ('onprogress' in xhr.upload));
-    };
-
-    // Is FormData supported?
-    function supportFormData() {
-      return !! window.FormData;
-    }
-  }
-
-  // Actually confirm support
-  if (supportAjaxUploadWithProgress()) {
-    //var notice = document.getElementById('support-notice');
-    //notice.innerHTML = "Your browser supports HTML uploads. Go try me! :-)";
-    var uploadBtn = document.getElementById('upload-button-id');
-    uploadBtn.removeAttribute('disabled');
-
-    // Init the Ajax form submission
-    //initFullFormAjaxUpload();
-
-    // Init the single-field file upload
-    initFileOnlyAjaxUpload();
-  }
-
-  // function initFullFormAjaxUpload() {
-  //   var form = document.getElementById('form-id');
-  //   form.onsubmit = function() {
-  //     // FormData receives the whole form
-  //     var formData = new FormData(form);
-
-  //     // We send the data where the form wanted
-  //     var action = form.getAttribute('action');
-
-  //     // Code common to both variants
-  //     sendXHRequest(formData, action);
-
-  //     // Avoid normal form submission
-  //     return false;
-  //   }
-  // }
-
-  function initFileOnlyAjaxUpload() {
-    var uploadBtn = document.getElementById('upload-button-id');
-    uploadBtn.onclick = function (evt) {
-      var formData = new FormData();
-
-      // Since this is the file only, we send it to a specific location
-      var action = '/attachfile-upload';
-
-      // FormData only has the file
-      var fileInput = document.getElementById('file-id');
-      var file = fileInput.files;
-
-      //for(var i=0;i<file.length;i++){
-      //  sendXHRequest(file[i], action);
-      //}
-
-      for(var ii=0;ii<upload_file_list.length;ii++){
-        if(upload_file_list[ii] != null){
-          sendXHRequest(upload_file_list[ii], action);
+          });
+        },
+        onUpload: function(id, fileName) {
+          $('#file-' + id).addClass('alert-info')
+                          .html('#{image_tag 'loading.gif'}' +
+                                'Initializing ' +
+                                '“' + fileName + '”');
+        },
+        onProgress: function(id, fileName, loaded, total) {
+          if (loaded < total) {
+            progress = Math.round(loaded / total * 100) + '% of ' + Math.round(total / 1024) + ' kB';
+            $('#file-' + id).removeClass('alert-info')
+                            .html('#{image_tag 'loading.gif'}' +
+                                  'Uploading ' +
+                                  '“' + fileName + '” ' +
+                                  progress);
+          } else {
+            $('#file-' + id).addClass('alert-info')
+                            .html('#{image_tag 'loading.gif'}' +
+                                  'Saving ' +
+                                  '“' + fileName + '”');
+          }
+        },
+        onComplete: function(id, fileName, responseJSON) {
+          if (responseJSON.success) {
+            $('#file-' + id).removeClass('alert-info')
+                            .addClass('alert-success')
+                            .html('<i class="icon-ok"></i> ' +
+                                  'Successfully saved ' +
+                                  '“' + fileName + '”' +
+                                  '<br>');
+          } else {
+            $('#file-' + id).removeClass('alert-info')
+                            .addClass('alert-error')
+                            .html('<i class="icon-exclamation-sign"></i> ' +
+                                  'Error with ' +
+                                  '“' + fileName + '”: ' +
+                                  responseJSON.text);
+          }
         }
       }
+    });
 
-    }
-  }
 
-  // Once the FormData instance is ready and we know
-  // where to send the data, the code is the same
-  // for both variants of this technique
-  function sendXHRequest(formData, uri) {
-    // Get an XMLHttpRequest instance
-    var xhr = new XMLHttpRequest();
-
-    // Set up events
-    xhr.upload.addEventListener('loadstart', onloadstartHandler, false);
-    xhr.upload.addEventListener('progress', onprogressHandler, false);
-    xhr.upload.addEventListener('load', onloadHandler, false);
-    xhr.addEventListener('readystatechange', onreadystatechangeHandler, false);
-
-    // Set up request
-    xhr.open('POST', uri, true);
-
-    // Fire!
-    xhr.send(formData);
-  }
-
-  // Handle the start of the transmission
-  function onloadstartHandler(evt) {
-    var div = document.getElementById('upload-status');
-    div.innerHTML = 'Upload started!';
-  }
-
-  // Handle the end of the transmission
-  function onloadHandler(evt) {
-    var div = document.getElementById('upload-status');
-    div.innerHTML = 'Upload successful!';
-  }
-
-  // Handle the progress
-  function onprogressHandler(evt) {
-    var div = document.getElementById('progress');
-    var percent = evt.loaded/evt.total*100;
-    div.innerHTML = 'Progress: ' + percent + '%';
-  }
-
-  // Handle the response from the server
-  function onreadystatechangeHandler(evt) {
-    var status = null;
-
-    try {
-      status = evt.target.status;
-    }
-    catch(e) {
-      return;
-    }
-
-    if (status == '200' && evt.target.responseText) {
-      var result = document.getElementById('result');
-      result.innerHTML = '<p>The server saw it as:</p><pre>' + evt.target.responseText + '</pre>';
-    }
-  }
+  });

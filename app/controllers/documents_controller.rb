@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
 
-  #before_filter :current_user , except:[:upload , :attachfile_download]
+  before_filter :current_user , except:[:upload , :attachfile_download]
   
   def index
 
@@ -115,17 +115,18 @@ class DocumentsController < ApplicationController
 
     tmpfile=Tmpfile.new
 
-    tmpfile.ufilename=File.basename(params["our-file"].tempfile)
-    tmpfile.ufilepath=File.dirname(params["our-file"].tempfile)
-    tmpfile.filesize=File.size(params["our-file"].tempfile)
-    tmpfile.filename=File.basename(params["our-file"].original_filename)
-    tmpfile.time_token=params["time-token"]
+    tmpfile.ufilename=File.basename(params["qqfile"].tempfile)
+    tmpfile.ufilepath=File.dirname(params["qqfile"].tempfile)
+    tmpfile.filesize=File.size(params["qqfile"].tempfile)
+    tmpfile.filename=File.basename(params["qqfile"].original_filename)
+    tmpfile.time_token=params["time_token"]
 
     tmpfile.save!
 
-    # respond_to do |format|
-    #   format.all{ render nothing:true}
-    # end
+    respond_to do |format|
+      # 주의 따옴표가 아니면 fineupload에서 못알아듣는다.
+      format.all { render text: "{\"success\":true}"}
+    end
   end
 
   # 첨부파일 다운로드
