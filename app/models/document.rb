@@ -9,11 +9,11 @@ class Document < ActiveRecord::Base
   paginates_per 10
 
   def self.list_updated(page)
-  	Document.includes(:comments , :attachfiles).order("updated_at desc").page(page)
+  	Document.includes(:user , :comments , :attachfiles).order("updated_at desc").page(page)
   end
 
   def self.show(params)
-  	Document.includes(:attachfiles).find(params[:id])
+  	Document.includes(:comments , :attachfiles).find(params[:id])
   end
 
 end

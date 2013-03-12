@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130311075519) do
+ActiveRecord::Schema.define(:version => 20130312022519) do
 
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
@@ -39,16 +39,17 @@ ActiveRecord::Schema.define(:version => 20130311075519) do
   end
 
   create_table "documents", :force => true do |t|
-    t.integer  "user_id",                          :null => false
+    t.integer  "user_id",                           :null => false
     t.integer  "attachfile_id"
-    t.integer  "groupid",                          :null => false
-    t.integer  "version",                          :null => false
-    t.boolean  "published",     :default => false
-    t.string   "title",                            :null => false
+    t.integer  "groupid",                           :null => false
+    t.integer  "version",                           :null => false
+    t.boolean  "published",      :default => false
+    t.string   "title",                             :null => false
     t.text     "content"
-    t.integer  "readcount",     :default => 0
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.integer  "readcount",      :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.integer  "comments_count", :default => 0
   end
 
   create_table "tmpfiles", :force => true do |t|
@@ -68,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20130311075519) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
-    t.string   "password"
   end
 
 end

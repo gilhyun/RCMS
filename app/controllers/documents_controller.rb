@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
 
-  before_filter :current_user
+  #before_filter :current_user , except:[:upload , :attachfile_download]
   
   def index
 
@@ -123,9 +123,9 @@ class DocumentsController < ApplicationController
 
     tmpfile.save!
 
-    respond_to do |format|
-      format.all{ render nothing:true}
-    end
+    # respond_to do |format|
+    #   format.all{ render nothing:true}
+    # end
   end
 
   # 첨부파일 다운로드

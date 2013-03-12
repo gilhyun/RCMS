@@ -4,26 +4,23 @@
   %tr{align:"center"}
     %th 사용자ID
     %th EMAIL
-    %th 관리자여부
+    %th 관리자
     %th 작업
 
   - @users.each do |user|
     %tr
-      %td= user.userid
+      %td
+        = link_to "#{user.userid}", user , remote:true
       %td= user.email
       %td= user.admin
       %td
-        = link_to '', user , remote:true , class:"icon-play" , data:{ toggle:"tooltip" , placement:"left" , title:"보기" }
-        
         = link_to '', edit_user_path(user) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
         
         = link_to '', user, method:"delete", class:"icon-remove" , data: { confirm: "#{user.userid} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
-
-.navigation
-  = paginate @users , remote:true
-
-= link_to 'New User', new_user_path , remote:true
+= link_to '추가', new_user_path , remote:true , class:"btn btn-primary btn-small pull-right"
+%br
+= paginate @users , remote:true
 
 :javascript
   $(function(){

@@ -1,4 +1,6 @@
 RCMS::Application.routes.draw do
+
+  match "attachfile-upload" => "documents#upload"
   
   resources :sessions
   
@@ -11,7 +13,7 @@ RCMS::Application.routes.draw do
     resources :comments
   end
 
-  match "attachfile-upload" => "documents#upload"
+  
   #match 'documents/:id/attachfile_download' => "documents#attachfile_download"
 
 

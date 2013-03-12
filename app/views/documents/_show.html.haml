@@ -25,19 +25,16 @@
   = @document.content.html_safe
 %hr
 
-= link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini pull-right"
-&nbsp;&nbsp;
-= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini pull-right"
+.btn-group.pull-right
+  = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
+  = link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 
 = form_for [@document, Comment.new], remote:true  do |f|
 
-  / 
-  / TODO  ::
-  /
+  /@current_user -> application_controller
   %br
-  -@user=User.first
-  %input{type:"hidden" , name:"comment[user_id]" , value:@user.id}
+  %input{type:"hidden" , name:"comment[user_id]" , value:@current_user.id}
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
 

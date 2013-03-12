@@ -25,13 +25,9 @@
       = check_box_tag "attachfiles[file_#{inx}]", af.id
       = af.filename
 
-
-  / 
-  / TODO  ::
-  /
+  /application_controller
   %br
-  -@user=User.first
-  %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@user.id}
+  %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@current_user.id}
 
 
 
@@ -59,12 +55,19 @@
 
   %br
 
-  
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini pull-right"
-  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini pull-right"
+  .btn-group.pull-right
+    = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+    = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
   
 :javascript
 //https://github.com/newbamboo/example-ajax-upload
+
+  $.ajaxSetup({
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    }
+  }); 
+
   $(function(){
 
     $("#file-id").css("visibility","hidden");
@@ -179,15 +182,15 @@
       var fileInput = document.getElementById('file-id');
       var file = fileInput.files;
 
-      for(var i=0;i<file.length;i++){
-        sendXHRequest(file[i], action);
-      }
+      //for(var i=0;i<file.length;i++){
+      //  sendXHRequest(file[i], action);
+      //}
 
-      // for(var ii=0;ii<upload_file_list.length;ii++){
-      //   if(upload_file_list[ii] != null){
-      //     sendXHRequest(upload_file_list[ii], action);
-      //   }
-      // }
+      for(var ii=0;ii<upload_file_list.length;ii++){
+        if(upload_file_list[ii] != null){
+          sendXHRequest(upload_file_list[ii], action);
+        }
+      }
 
     }
   }
