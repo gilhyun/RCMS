@@ -1,5 +1,6 @@
 %p#notice= notice
 
+
 %h4
   = @document.title
 
@@ -16,7 +17,7 @@
     -file_url=File.join(download_path,@document.id.to_s,attachfile.id.to_s)
     
     - file_str << link_to("#{attachfile.filename}", action:'attachfile_download', params:{id:@document.id, attachfile_id:attachfile.id})
-
+  %br
   %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
     첨부파일
 
@@ -29,10 +30,12 @@
   = @document.content.html_safe
 %hr
 
-.btn-group.pull-right
-  = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
-  = link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
-
+.btn-group.pull-left
+  = link_to '수정하기', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
+  = link_to '목록으로', documents_path , remote:true , class:"btn btn-primary btn-mini"
+%br
+%br
+%br
 
 = form_for [@document, Comment.new], remote:true  do |f|
 

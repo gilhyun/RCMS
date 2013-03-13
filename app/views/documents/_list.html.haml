@@ -19,11 +19,10 @@
         
         = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
+= paginate @documents , remote:true
 
 - if @current_user
-  = link_to '글쓰기', new_document_path , remote:true , class:"btn btn-primary btn-small pull-right"
-%br
-= paginate @documents , remote:true
+  = link_to '글쓰기', new_document_path , remote:true , class:"btn btn-primary btn-small pull-left"
 
 :javascript
   $(function(){
