@@ -5,6 +5,12 @@ class SessionsController < ApplicationController
   # login ui
   def new
 
+    test_user=User.find_by_userid("test")
+    unless test_user
+      u=User.create(userid:"test", email:"railsdev71@gmail.com",password:"test")
+      u.save!
+    end
+
     if params[:cmd]=="login"
     end
 
