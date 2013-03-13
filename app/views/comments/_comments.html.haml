@@ -1,16 +1,23 @@
-%h5 
-  -if @document
-    -# counter_cache업데이트된 값을 위해 document를 다시 읽는다.
-    -doc=Document.find(@document)
-    =doc.comments_count
-    Comments
-- @comments.each do |comment|
-  %hr= comment.content
-  %p
-    %small.muted.pull-right
-      = comment.user.userid
-      &nbsp;&nbsp;
-      = comment.updated_at
 
-= paginate @comments , remote:true
-      
+-if @document
+  
+  -# counter_cache업데이트된 값을 위해 document를 다시 읽는다.
+  -doc=Document.find(@document)
+
+  %h5= "#{doc.comments_count} Comments"
+
+  - comments=doc.comments.list_updated(params[:comments_page])
+
+  - comments.each do |comment|
+
+    %hr= comment.content
+    %p
+      %small.muted.pull-right
+        = comment.user.userid
+        &nbsp;&nbsp;
+        = comment.updated_at
+
+  %br
+  %br
+  = paginate comments , remote:true , param_name:"comments_page"
+          

@@ -22,7 +22,6 @@ class DocumentsController < ApplicationController
 
   def show
     @document=Document.show(params)
-    @comments=@document.comments.list_updated(params[:page])
 
     respond_to do |format|
       format.html{ render "_show" }

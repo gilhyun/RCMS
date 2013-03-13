@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
   end
 
   def self.show(params)
-  	Document.includes(:comments , :attachfiles).find(params[:id])
+  	Document.includes(:user, :attachfiles).find(params[:id])
   end
 
 end

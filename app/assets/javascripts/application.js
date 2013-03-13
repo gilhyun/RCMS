@@ -14,12 +14,3 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
-//= require header
-//= require util
-//= require button
-//= require ajax.requester
-//= require handler.base
-//= require handler.form
-//= require handler.xhr
-//= require uploader.basic
-//= require_tree .

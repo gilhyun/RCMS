@@ -1,0 +1,10 @@
+//= require ./upload/header
+//= require ./upload/util
+//= require ./upload/button
+//= require ./upload/ajax.requester
+//= require ./upload/handler.base
+//= require ./upload/handler.form
+//= require ./upload/handler.xhr
+//= require ./upload/uploader.basic
+//= require_tree ./upload
+//= require_tree ./editor
