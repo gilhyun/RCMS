@@ -14,10 +14,11 @@
       %td= document.user.userid
       %td= document.updated_at.strftime("%Y%m%d")
       %td
+        - if document.user.id==session[:userid]
         
-        = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+          = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
         
-        = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
+          = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
 
 - if @current_user

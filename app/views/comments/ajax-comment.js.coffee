@@ -1,1 +1,1 @@
-$("#comment-lists").html("<%= j(render partial:"comments") %>");
+$("#comment-lists").html("<%= j(render partial:page) %>");

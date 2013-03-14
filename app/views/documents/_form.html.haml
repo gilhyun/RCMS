@@ -30,14 +30,10 @@
   %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@current_user.id}
 
   %br
+  %button#fine-uploader-basic.btn.btn-primary.btn-mini 파일첨부
+  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
 
-  .btn-group.pull-right
-    = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
-    = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
-
-
-
-%button#fine-uploader-basic.btn.btn-primary.btn-mini UPLOAD
 #messages
 
 %br

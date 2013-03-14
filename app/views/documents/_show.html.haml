@@ -29,9 +29,9 @@
   = @document.content.html_safe
 %hr
 
-.btn-group.pull-right
+- if @document.user.id==session[:userid]
   = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
-  = link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
+= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 
 = form_for [@document, Comment.new], remote:true  do |f|
