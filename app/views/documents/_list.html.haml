@@ -23,7 +23,11 @@
 = paginate @documents , remote:true
 
 - if @current_user
-  = link_to '글쓰기', new_document_path , remote:true , class:"btn btn-primary btn-small pull-left"
+  .btn-group
+    %a.btn.btn-primary.btn-mini{href:"#{new_document_url}",data:{remote:true}}
+      %i.icon-pencil.icon-white
+      글쓰기
+  /= link_to '글쓰기', new_document_path , remote:true , class:"btn btn-primary btn-small pull-left"
 
 :javascript
   $(function(){

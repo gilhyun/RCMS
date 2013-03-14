@@ -1,5 +1,6 @@
 %p#notice= notice
 
+%h6= @document.category.name
 
 %h4
   = @document.title
@@ -23,6 +24,16 @@
 
 %br
 %hr
+- if @document.user.id==session[:userid]
+  .btn-group
+    %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
+      %i.icon-edit.icon-white
+      수정
+
+.btn-group
+  %a.btn.btn-primary.btn-mini{href:"#{documents_url}",data:{remote:true}}
+    %i.icon-list.icon-white
+    목록
 
 %h5
   = @document.content.html_safe
@@ -30,10 +41,19 @@
 
 %br
 
+/- if @document.user.id==session[:userid]
+/  = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
+/= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
 - if @document.user.id==session[:userid]
-  = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
-= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
+  .btn-group
+    %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
+      %i.icon-edit.icon-white
+      수정
 
+.btn-group
+  %a.btn.btn-primary.btn-mini{href:"#{documents_url}",data:{remote:true}}
+    %i.icon-list.icon-white
+    목록
 
 
 =# Comment 추가 폼 
@@ -46,8 +66,7 @@
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
   .input-append
-    %input.span6{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
-    /= f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+    %input#comment.span6{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
     %button.btn{type:"submit"} 저장
 
 

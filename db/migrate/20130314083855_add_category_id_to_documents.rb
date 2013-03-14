@@ -1,6 +1,7 @@
 class AddCategoryIdToDocuments < ActiveRecord::Migration
   def up
-  	add_column :documents , :category_id , :integer , null: :false
+  	add_column :documents , :category_id , :integer
+  	change_column :documents , :category_id , :integer , null:false
   end
 
   def down

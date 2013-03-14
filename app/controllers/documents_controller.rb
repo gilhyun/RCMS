@@ -40,7 +40,7 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    @document = Document.find(params[:id])
+    @document = Document.show(params)
     
     respond_to do |format|
       format.html{ render "_form"}

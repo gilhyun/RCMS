@@ -6,12 +6,15 @@ en:
     attributes:
       user:
         userid: "사용자ID"
+      document:
+        title: "제목"
+        category_id: "분류"
     errors:
       models:
         user:
           attributes:
             userid:
-              blank: "를 입력해야 합니다."
+              
   views:
     pagination:
       first: "&lt;&lt"

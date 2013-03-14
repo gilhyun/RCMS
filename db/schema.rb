@@ -16,15 +16,15 @@ ActiveRecord::Schema.define(:version => 20130314083855) do
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
     t.string   "filename",    :null => false
-    t.string   "filepath"
+    t.string   "filepath",    :null => false
     t.integer  "filesize",    :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
   create_table "categories", :force => true do |t|
-    t.integer  "document_id", :null => false
     t.string   "name",        :null => false
+    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130314083855) do
   create_table "comments", :force => true do |t|
     t.integer  "user_id",     :null => false
     t.integer  "document_id", :null => false
-    t.integer  "version",     :null => false
+    t.integer  "version"
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20130314083855) do
   create_table "documents", :force => true do |t|
     t.integer  "user_id",                           :null => false
     t.integer  "attachfile_id"
-    t.integer  "groupid",                           :null => false
-    t.integer  "version",                           :null => false
+    t.integer  "groupid"
+    t.integer  "version"
     t.boolean  "published",      :default => false
     t.string   "title",                             :null => false
     t.text     "content"
@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(:version => 20130314083855) do
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false
     t.integer  "comments_count", :default => 0
-    t.integer  "category_id"
+    t.integer  "category_id",                       :null => false
   end
 
   create_table "tmpfiles", :force => true do |t|
-    t.string   "ufilename"
-    t.string   "ufilepath"
-    t.string   "filename"
+    t.string   "ufilename",  :null => false
+    t.string   "ufilepath",  :null => false
+    t.string   "filename",   :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "time_token"
@@ -64,12 +64,12 @@ ActiveRecord::Schema.define(:version => 20130314083855) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "userid"
-    t.string   "email"
-    t.boolean  "admin"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "password_digest"
+    t.string   "userid",                             :null => false
+    t.string   "email",                              :null => false
+    t.string   "password_digest",                    :null => false
+    t.boolean  "admin",           :default => false, :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
   end
 
 end

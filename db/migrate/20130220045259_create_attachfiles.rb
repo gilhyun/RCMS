@@ -4,7 +4,7 @@ class CreateAttachfiles < ActiveRecord::Migration
 
       t.integer :document_id , null:false
       t.string :filename , null:false
-      t.string :filepath
+      t.string :filepath , null:false
       t.integer :filesize , null:false
 
       t.timestamps

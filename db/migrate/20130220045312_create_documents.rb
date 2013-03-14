@@ -3,9 +3,9 @@ class CreateDocuments < ActiveRecord::Migration
     create_table :documents do |t|
 
     	t.integer :user_id , null:false
-    	t.integer :attachfile_id , null:false
-    	t.integer :groupid , null:false
-    	t.integer :version , null:false
+    	t.integer :attachfile_id
+    	t.integer :groupid
+    	t.integer :version
     	t.boolean :published , default:false
     	t.string :title , null:false
     	t.text :content 

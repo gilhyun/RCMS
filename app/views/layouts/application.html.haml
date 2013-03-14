@@ -34,9 +34,9 @@
           #topmenu.nav-collapse
             = render "admin/sidebar"
             - unless @current_user
-              %h6.pull-right= link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
+              = link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
             - else
-              %h6.pull-right= link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
+              = link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
 
     .container
 

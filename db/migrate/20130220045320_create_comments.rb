@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration
 
       t.integer :user_id , null:false
       t.integer :document_id , null:false
-      t.integer :version , null:false
+      t.integer :version
       t.text :content
 
       t.timestamps
