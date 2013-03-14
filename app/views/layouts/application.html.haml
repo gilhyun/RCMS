@@ -28,27 +28,22 @@
 
           = link_to "RCMS", users_path , class:"brand"
 
-          #topmenu.nav-collapse
-            %ul.nav
-              
-              %li
-                .input-append  
-                  %input.span2{type:"text", placeholder:"search..."}
-                  %span.add-on
-                    %i.icon-search
-              
-          - unless @current_user
-            %h6.pull-right= link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
-          - else
-            %h6.pull-right= link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
-            /%a.icon-user.icon-white{href:"#"}
+          = form_for Document.new , remote:true , class:"form-search" do |f|
+            =f.text_field :content , class:"input-medium navbar-search"
 
+          #topmenu.nav-collapse
+            = render "admin/sidebar"
+            - unless @current_user
+              %h6.pull-right= link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
+            - else
+              %h6.pull-right= link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
 
     .container
 
       .row
-        #sidebar.span2.nav-collapse
-          = render "admin/sidebar"
+        #sidebar.span1.nav-collapse
+          
+          
 
         #rcms-main.span9
           = yield

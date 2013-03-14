@@ -30,12 +30,9 @@
   %input#document-user_id{type:"hidden" , name:"document[user_id]" , value:@current_user.id}
 
   %br
-
-  .btn-group.pull-left
-    = f.submit "저장하기" , remote:true , class:"btn btn-primary btn-mini"
-    = link_to "목록으로" , documents_path , remote:true , class:"btn btn-primary btn-mini"
-    %button#fine-uploader-basic.btn.btn-primary.btn-mini 파일첨부
-
+  %button#fine-uploader-basic.btn.btn-primary.btn-mini 파일첨부
+  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 %br
 

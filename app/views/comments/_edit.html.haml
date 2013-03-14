@@ -1,0 +1,10 @@
+= form_for [@document, @comment], remote:true  do |f|
+
+  %br
+  %input{type:"hidden" , name:"comment[user_id]" , value:session[:userid]}
+  %input{type:"hidden" , name:"comment[version]" , value:"0"}
+
+  .input-append
+    %input.span6{type:"text", name:"comment[content]" , value:@comment.content}
+    %button.btn{type:"submit", data:{remote:"true"} } 저장
+    = link_to "취소", document_comments_path(@document) , remote:true , class:"btn"

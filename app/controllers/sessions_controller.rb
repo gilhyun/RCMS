@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
     end
 
     if params[:cmd]=="login"
+
     end
 
     if params[:cmd]=="logout"
