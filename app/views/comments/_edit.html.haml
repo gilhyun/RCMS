@@ -4,7 +4,7 @@
   %input{type:"hidden" , name:"comment[user_id]" , value:session[:userid]}
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
-
-  %input.input-xxlarge{name:"comment[content]" , value:@comment.content}
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
-  = link_to "취소", document_comments_path(@document) , remote:true , class:"btn btn-primary btn-mini"
+  .input-append
+    %input.span6{type:"text", name:"comment[content]" , value:@comment.content}
+    %button.btn{type:"submit", data:{remote:"true"} } 저장
+    = link_to "취소", document_comments_path(@document) , remote:true , class:"btn"

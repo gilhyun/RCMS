@@ -5,9 +5,26 @@ class CommentsController < ApplicationController
 		@document=Document.find(params[:document_id])
 
 		respond_to do |format|
-		  @comments=@document.comments.list_updated(params[:comments_page])
 	      format.js{ render "ajax-comment", locals:{page:"comments"} } 
 	    end
+	end
+
+	def show
+		# ajax comment edit 수정후 url 이 아래처럼 바뀐다. comment의 id 값이 있으니..
+		# show action을 호출하게 된다.
+		#Started GET "/documents/1068177635/comments/70?_method=put&authen
+
+		# 아래처럼 되어야 paging이 정상 처리된다.
+		#Started GET "/documents/1068177635?comments_page=2" for 127.0.0.1 at
+
+		# 그래서 , 아래처럼 강제로 목록을 나타내도록 처리했으나...
+		# 임시 방편일뿐이다.
+		# 방법1 : index
+		# 방법2: 혹은 아래처럼..
+		#redirect_to document_comments_path(params[:document_id])
+		# 방법3 : update 42 라인..format.all 이 ajax에도 반응한다.
+
+		# 방법3을 쓸경우 여기 show action 필요없음.
 	end
 
 	def edit
@@ -23,7 +40,8 @@ class CommentsController < ApplicationController
 		@comment = @document.comments.find(params[:id])
 		respond_to do |format|
 			if @comment.update_attributes(params[:comment])
-				format.js{ render "ajax-comment", locals:{page:"comments"} } 
+				#format.js{ render "ajax-comment", locals:{page:"comments"} } 
+				format.all{ redirect_to document_path(@document)}
 			end
 		end
 	end
@@ -35,10 +53,8 @@ class CommentsController < ApplicationController
 
 	    respond_to do |format|
 	      if @comment.save
-	      	@comments=Comment.list_updated(params[:comments_page])
 	        format.js{ render "ajax-comment", locals:{page:"comments"} } 
 	      else
-	      	@comments=Comment.list_updated(params[:comments_page])
 	        format.js{ render "ajax-comment", locals:{page:"comments"} } 
 	      end
 	    end

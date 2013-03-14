@@ -20,8 +20,6 @@
   %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
     첨부파일
 
-=# popover 예제.
-=#<a href="#" class="btn" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="Popover on top">Popover on top</a>
 %br
 %hr
 
@@ -34,6 +32,9 @@
 = link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 
+
+=# Comment 추가 폼 
+
 = form_for [@document, Comment.new], remote:true  do |f|
 
   /@current_user -> application_controller
@@ -41,10 +42,14 @@
   %input{type:"hidden" , name:"comment[user_id]" , value:@current_user.id}
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
+  .input-append
+    %input.span6{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
+    /= f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
+    %button.btn{type:"submit"} 저장
 
-  %input.input-xxlarge{name:"comment[content]" , placeholder:"Comment ... "}
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
 
+
+=# Comment list
 
 %div#comment-lists
   = render partial:"comments/comments"
