@@ -1,0 +1,31 @@
+%h4 분류 리스트
+
+%table.table.table-hover
+  %tr{align:"center"}
+    %th NAME
+    %th DESC
+    %th 작업
+
+  - @categories.each do |category|
+    %tr
+      %td
+        = link_to "#{category.name}", category , remote:true
+      %td= category.description
+      %td
+        = link_to '', edit_category_path(category) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+        
+        = link_to '', category, method:"delete", class:"icon-remove" , data: { confirm: "#{category.name} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
+
+.btn-group
+  %a.btn.btn-primary.btn-mini{href:"#{new_category_url}",data:{remote:true}}
+    %i.icon-pencil.icon-white
+    분류추가
+
+%br
+= paginate @categories , remote:true
+
+:javascript
+  $(function(){
+    $(".icon-edit").tooltip();
+    $(".icon-remove").tooltip();
+  })

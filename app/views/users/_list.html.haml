@@ -1,6 +1,6 @@
-%h3 사용자 리스트
+%h4 사용자 리스트
 
-%table.table.table-condensed.table-hover
+%table.table.table-hover
   %tr{align:"center"}
     %th 사용자ID
     %th EMAIL
@@ -18,7 +18,10 @@
         
         = link_to '', user, method:"delete", class:"icon-remove" , data: { confirm: "#{user.userid} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
-= link_to '추가', new_user_path , remote:true , class:"btn btn-primary btn-small pull-right"
+.btn-group
+  %a.btn.btn-primary.btn-mini{href:"#{new_user_url}",data:{remote:true}}
+    %i.icon-pencil.icon-white
+    사용자 추가
 %br
 = paginate @users , remote:true
 

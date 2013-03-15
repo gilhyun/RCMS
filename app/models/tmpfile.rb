@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Tmpfile < ActiveRecord::Base
   attr_accessible :filename, :ufilename, :ufilepath , :time_token
 

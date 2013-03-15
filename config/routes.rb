@@ -1,10 +1,14 @@
 RCMS::Application.routes.draw do
 
   match "attachfile-upload" => "documents#upload"
+
+  match "search/:type" => "search#search" , :as => "search"
   
   resources :sessions
   
   resources :users
+
+  resources :categories
 
   resources :documents do
     member do

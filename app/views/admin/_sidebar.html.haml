@@ -1,3 +1,15 @@
-= link_to "사용자관리" , users_path , remote:true
-= link_to "분류관리" , users_path , remote:true
-= link_to "게시물관리" , documents_path , remote:true
+
+%li.nav-header
+  ADMIN 
+%li.divider
+
+%li
+  %a{href:"#{users_url}", data:{remote:true}}
+    사용자관리
+%li
+  %a{href:"#{categories_path}", data:{remote:true}}
+    분류관리
+%li
+  %a{href:"#{documents_path}", data:{remote:true}}
+    게시물관리
+    

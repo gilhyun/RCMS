@@ -1,0 +1,20 @@
+%h4= "#{@documents.total_count}건이 검색되었습니다."
+
+
+%table.table.table-hover
+  %tr{align:"center"}
+    %th{width:"85%"} 제목
+    %th{width:"15%"} 날짜
+
+  - @documents.each do |document|
+    %tr
+      %td
+        %p
+          %small.muted
+            = document.category.name
+        = link_to "#{document.title}", document , remote:true 
+
+      %td= document.updated_at.strftime("%Y%m%d")
+
+= paginate @documents , remote:true
+

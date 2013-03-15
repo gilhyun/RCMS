@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b NAME:
+  = @category.name
+%p
+  %b DESC:
+  = @category.description
+
+= link_to 'Edit', edit_category_path(@category) , remote:true
+\|
+= link_to 'Back', categories_path , remote:true

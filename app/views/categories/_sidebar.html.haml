@@ -1,0 +1,11 @@
+- categories=Category.all
+
+%li.nav-header
+  CATEGORIES
+%li.divider
+
+- categories.each do |category|
+  %li
+    %a{href:"#{documents_url(params:{category_id:category.id})}", data:{remote:true}}
+      = "#{category.name}"
+

@@ -1,0 +1,16 @@
+= form_for @category , remote:true do |f|
+  - if @category.errors.any?
+    %ul
+      - @category.errors.full_messages.each do |msg|
+        %li.text-error= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_field :description
+
+  = f.submit "저장" , remote:true , class:"btn btn-primary btn-small"
+  = link_to "목록" , categories_path , remote:true , class:"btn btn-primary btn-small"
+  

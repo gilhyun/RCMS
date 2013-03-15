@@ -17,33 +17,55 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .container
-          %button.btn.btn-navbar{ type:"button" , data:{toggle:"collapse", target:"#topmenu"} }
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
 
           %button.btn.btn-navbar{ type:"button" , data:{toggle:"collapse", target:"#sidebar"} }
+            %span.icon-bar
             %span.icon-bar
             %span.icon-bar
 
           = link_to "RCMS", users_path , class:"brand"
 
-          = form_for Document.new , remote:true , class:"form-search" do |f|
-            =f.text_field :content , class:"input-medium navbar-search"
-
-          #topmenu.nav-collapse
-            = render "admin/sidebar"
-            - unless @current_user
-              = link_to "LOGIN", new_session_path(cmd:"login"), class:"btn btn-primary btn-mini"
-            - else
-              = link_to "LOGOUT", new_session_path(cmd:"logout"), class:"btn btn-primary btn-mini"
+          = form_tag search_url(type:"all") , remote:true , class:"navbar-search pull-right" do
+            %input.search-query.pull-right#query{type:"text" , name:"query" , placeholder:"Search ..."}
 
     .container
 
       .row
-        #sidebar.span1.nav-collapse
+        #sidebar.span2.nav-collapse
+
+          .btn-group
+            
+            %a.btn.btn-primary.btn-mini{href:"#"}
+              %i.icon-user.icon-white
+              USER
+            
+            %a.btn.btn-primary.btn-mini.dropdown-toggle{href:"#", data:{toggle:"dropdown"}}
+              %span.caret
+            
+            %ul.dropdown-menu
+
+              %li
+                - unless @current_user
+                  %a{href:"#{new_session_path(params:{cmd:'login'})}"}
+                    LOGIN
+                - else
+                  %a{href:"#{new_session_path(params:{cmd:'logout'})}"}
+                    LOGOUT
+
+              %li
+                - if @current_user
+                  %a{href:"#"}
+                    정보수정
+
+          %br
+          %br
+
+          %ul.nav.nav-list
+            - if @current_user
+              = render "admin/sidebar"
+              = render "categories/sidebar"
           
-          
+        #space.span1
 
         #rcms-main.span9
           = yield

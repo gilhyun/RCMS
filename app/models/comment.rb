@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Comment < ActiveRecord::Base
 
   attr_accessible :user_id , :document_id , :version , :content

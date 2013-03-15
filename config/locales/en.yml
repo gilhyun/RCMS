@@ -6,9 +6,32 @@ en:
     attributes:
       user:
         userid: "ID"
+        email: "EMAIL"
+        password: "PASSWORD"
+      document:
+        title: "TITLE"
+        category_id: "CATEGORY"
+      category:
+        name: "NAME"
     errors:
       models:
         user:
           attributes:
-            userid:
-              blank: "is required"
+            userid: "ID"
+            email: "EMAIL"
+            password: "PASSWORD"
+        document:
+          attributes:
+            title: "TITLE"
+            category_id: "CATEGORY"
+        category:
+          attributes:
+            name: "NAME"
+
+  views:
+    pagination:
+      first: "&lt;&lt"
+      last: "&gt;&gt"
+      previous: "&lt;"
+      next: "&gt"
+      truncate: "..."

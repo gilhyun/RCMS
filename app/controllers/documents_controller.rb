@@ -4,7 +4,13 @@ class DocumentsController < ApplicationController
   
   def index
 
-    @documents = Document.list_updated(params[:page])
+    unless params[:category_id]
+      @category=Category.first 
+    else
+      @category=Category.find(params[:category_id])
+    end
+
+    @documents = @category.documents.list_updated(params[:page])
 
     respond_to do |format|
 
