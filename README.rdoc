@@ -1,12 +1,13 @@
 == RCMS(Rails Content Management System)
 
-Rails로 만든 간단한 게시판입니다.
+Rails로 만든 간단한 게시판
 
-다음과 같은 기능이 있습니다.
+특징.
 
 1. Bootstrap을 이용한 Responsive web
-2. 폰, 태블릿, 데스크탑 환경에서 사용가능합니다.
-
+2. 폰, 태블릿, 데스크탑 환경에서 사용가능.
+3. multiple file upload
+4. Safari,Chrome,Firefox,IE 사용가능
 
 == Getting Started
 
@@ -18,7 +19,5 @@ Rails로 만든 간단한 게시판입니다.
 6. thin start
 7. 끝.
 
-
-heroku 에 데모버전을 올릴예정입니다.
 
 railsdev71@gmail.com
