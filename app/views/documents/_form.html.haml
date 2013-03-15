@@ -68,9 +68,11 @@
 %br
 %br
 
-=javascript_include_tag params[:controller]
+= javascript_include_tag params[:controller]
 
 :javascript
+
+
 
   function set_category(cat_id, cat_name){
     $("#category-id").attr('value',cat_id);
@@ -83,8 +85,9 @@
      $("#document_title").focus();
 
     // web editor
-    $('#document-content').wysiwyg({
-    });
+    //$('#document-content').wysiwyg({
+    //});
+    
 
 
     var fub = $('#fine-uploader-basic');
@@ -113,7 +116,7 @@
           $('#file-' + id).addClass('alert-info')
                           .html('#{image_tag 'loading.gif'}' +
                                 'Initializing ' +
-                                '“' + fileName + '”');
+                                '"' + fileName + '"');
         },
         onProgress: function(id, fileName, loaded, total) {
           if (loaded < total) {
@@ -121,13 +124,13 @@
             $('#file-' + id).removeClass('alert-info')
                             .html('#{image_tag 'loading.gif'}' +
                                   'Uploading ' +
-                                  '“' + fileName + '” ' +
+                                  '"' + fileName + '" ' +
                                   progress);
           } else {
             $('#file-' + id).addClass('alert-info')
                             .html('#{image_tag 'loading.gif'}' +
                                   'Saving ' +
-                                  '“' + fileName + '”');
+                                  '"' + fileName + '"');
           }
         },
         onComplete: function(id, fileName, responseJSON) {
@@ -136,19 +139,18 @@
                             .addClass('alert-success')
                             .html('<i class="icon-ok"></i> ' +
                                   'Successfully saved ' +
-                                  '“' + fileName + '”' +
+                                  '"' + fileName + '"' +
                                   '<br>');
           } else {
             $('#file-' + id).removeClass('alert-info')
                             .addClass('alert-error')
                             .html('<i class="icon-exclamation-sign"></i> ' +
                                   'Error with ' +
-                                  '“' + fileName + '”: ' +
+                                  '"' + fileName + '": ' +
                                   responseJSON.text);
           }
         }
       }
     });
-
 
   });

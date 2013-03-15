@@ -6,5 +6,5 @@
 //= require ./upload/handler.form
 //= require ./upload/handler.xhr
 //= require ./upload/uploader.basic
-//= require_tree ./upload
-//= require_tree ./editor
+//= require_directory ./upload
+//= require_directory ./tinyeditor

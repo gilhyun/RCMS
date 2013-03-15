@@ -7,10 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-user=User.create(userid:"test", email:"railsdev71@gmail.com",password:"test")
+user=User.create(userid:"admin", email:"railsdev71@gmail.com",password:"admin",admin:true)
+user1=User.create(userid:"test", email:"railsdev71@gmail.com",password:"test")
 category=Category.create(name:"RCMS_CATEGORY1",description:"RCMS BASE CATEGORY1")
 category2=Category.create(name:"RCMS_CATEGORY2",description:"RCMS BASE CATEGORY2")
 
+user1.save
 user.save!
 category.save!
 category2.save!

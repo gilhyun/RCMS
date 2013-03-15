@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+
+	before_filter :current_user
 	
 	def search
 

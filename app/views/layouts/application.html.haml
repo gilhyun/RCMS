@@ -45,24 +45,27 @@
             %ul.dropdown-menu
 
               %li
-                - unless @current_user
+                - if @current_user
+                  %ul.nav.nav-list
+                    %li.nav-header= @current_user.userid
+                    %li.divider
+                    %li
+                      %a{href:"#{edit_user_url(@current_user)}"}
+                        정보수정
+                    %li
+                      %a{href:"#{new_session_path(params:{cmd:'logout'})}"}
+                        LOGOUT
+                - else
                   %a{href:"#{new_session_path(params:{cmd:'login'})}"}
                     LOGIN
-                - else
-                  %a{href:"#{new_session_path(params:{cmd:'logout'})}"}
-                    LOGOUT
-
-              %li
-                - if @current_user
-                  %a{href:"#"}
-                    정보수정
 
           %br
           %br
 
           %ul.nav.nav-list
             - if @current_user
-              = render "admin/sidebar"
+              - if @current_user.admin
+                = render "admin/sidebar"
               = render "categories/sidebar"
           
         #space.span1

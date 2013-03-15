@@ -10,9 +10,12 @@
   .field
     = f.label :email
     = f.text_field :email
-  .field
-    = f.label :admin
-    = f.check_box :admin
+
+  - if @curret_user and @current_user.admin
+    .field
+      = f.label :admin
+      = f.check_box :admin
+  
   .field
     = f.label :password
     = f.text_field :password

@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+	before_filter :current_user
+
 	def index
 
 		@document=Document.find(params[:document_id])
