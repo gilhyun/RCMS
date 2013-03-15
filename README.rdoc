@@ -20,7 +20,7 @@ Rails로 만든 간단한 게시판
 7. 끝.
 
 
-Demo : http://railsdev71.heroku.com
+Demo : http://railsdev71.heroku.com/documents
 
 ID/PASS : test/test
 
