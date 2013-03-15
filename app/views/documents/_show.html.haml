@@ -24,7 +24,7 @@
 
 %br
 %hr
-- if @document.user.id==session[:userid]
+- if @document.user.id==session[:userid] or @current_user.admin
   .btn-group
     %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
       %i.icon-edit.icon-white
@@ -44,7 +44,7 @@
 /- if @document.user.id==session[:userid]
 /  = link_to '수정', edit_document_path(@document) , remote:true , class:"btn btn-primary btn-mini"
 /= link_to '목록', documents_path , remote:true , class:"btn btn-primary btn-mini"
-- if @document.user.id==session[:userid]
+- if @document.user.id==session[:userid] or @current_user.admin
   .btn-group
     %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
       %i.icon-edit.icon-white

@@ -20,7 +20,7 @@
         = comment.updated_at
         &nbsp;&nbsp;
         
-        - if comment.user_id==session[:userid]
+        - if comment.user_id==session[:userid] or @current_user.admin
 
           = link_to '', edit_document_comment_path(doc,comment) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
 

@@ -12,6 +12,9 @@
 - if @document.category_id
   %span.alert.alert-success#sel-category-name
     =@document.category.name
+-elsif @category
+  %span.alert.alert-success#sel-category-name
+    =@category.name
 -else
   %span.alert#sel-category-name
     분류를 먼저 선택하세요.
@@ -85,9 +88,9 @@
      $("#document_title").focus();
 
     // web editor
-    //$('#document-content').wysiwyg({
-    //});
-    
+    $('#document-content').wysiwyg({
+    });
+
 
 
     var fub = $('#fine-uploader-basic');

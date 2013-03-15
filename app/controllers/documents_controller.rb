@@ -37,7 +37,12 @@ class DocumentsController < ApplicationController
   end
 
   def new
-    @document = Document.new
+    if params[:category_id]
+      @category=Category.find(params[:category_id])
+      @document=@category.documents.new
+    else
+      @document = Document.new
+    end
 
     respond_to do |format|
       format.html{ render "_form"}
