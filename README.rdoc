@@ -20,4 +20,10 @@ Rails로 만든 간단한 게시판
 7. 끝.
 
 
+Demo : http://railsdev71@gmail.com
+
+ID/PASS : test/test
+
+
+
 railsdev71@gmail.com
