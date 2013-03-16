@@ -7,6 +7,16 @@
   %b DESC:
   = @category.description
 
-= link_to 'Edit', edit_category_path(@category) , remote:true
-\|
-= link_to 'Back', categories_path , remote:true
+
+%hr
+- if @current_user.id==session[:userid] or @current_user.admin
+  .btn-group
+    %a.btn.btn-primary.btn-mini{href:"#{edit_category_url(@category)}" , data:{remote:true}}
+      %i.icon-edit.icon-white
+      수정
+
+- if @current_user.admin
+  .btn-group
+    %a.btn.btn-primary.btn-mini{href:"#{categories_url}",data:{remote:true}}
+      %i.icon-list.icon-white
+      목록

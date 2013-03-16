@@ -7,4 +7,4 @@
 //= require ./upload/handler.xhr
 //= require ./upload/uploader.basic
 //= require_directory ./upload
-//= require_directory ./editor
+//= require bootstrap-wysihtml5

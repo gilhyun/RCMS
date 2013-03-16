@@ -11,6 +11,16 @@
     = f.label :description
     = f.text_field :description
 
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-small"
-  = link_to "목록" , categories_path , remote:true , class:"btn btn-primary btn-small"
+  %hr
+  - if @current_user.id==session[:userid] or @current_user.admin
+    .btn-group
+      %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
+        %i.icon-edit.icon-white
+        저장
+            
+  - if @current_user.admin
+    .btn-group
+      %a.btn.btn-primary.btn-mini{href:"#{categories_url}",data:{remote:true}}
+        %i.icon-list.icon-white
+        목록
   

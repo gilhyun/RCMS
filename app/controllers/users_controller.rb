@@ -65,7 +65,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to users_path}
+        # 관리자가 아닌 사람도 자신의 정보를 수정성공시 show로 가도록 한다.
+        format.html { redirect_to user_path(@user) }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
         format.js{ render "ajax", locals:{page:"form"} } 

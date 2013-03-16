@@ -18,8 +18,19 @@
   
   .field
     = f.label :password
-    = f.text_field :password
+    = f.password_field :password
 
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-small"
-  = link_to "목록" , users_path , remote:true , class:"btn btn-primary btn-small"
+  %hr
+  - if @user.id==session[:userid] or @current_user.admin
+    .btn-group
+      %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
+        %i.icon-edit.icon-white
+        저장
+            
+  - if @current_user.admin
+    .btn-group
+      %a.btn.btn-primary.btn-mini{href:"#{users_url}",data:{remote:true}}
+        %i.icon-list.icon-white
+        목록
+
   
