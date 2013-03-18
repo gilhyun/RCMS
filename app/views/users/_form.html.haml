@@ -10,25 +10,29 @@
   .field
     = f.label :email
     = f.text_field :email
+  
+  %br
 
   - if @current_user and @current_user.admin
     .field
-      = f.label :admin
-      = f.check_box :admin
+      %label.checkbox
+        Admin
+        = f.check_box :admin
   
+  %br
+
   .field
     = f.label :password
     = f.password_field :password
 
   %hr
-  - if @user.id==session[:userid] or @current_user.admin
-    .btn-group
+  .btn-group
+    - if @user.id==session[:userid] or @current_user.admin
       %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
         %i.icon-edit.icon-white
         저장
-            
-  - if @current_user.admin
-    .btn-group
+              
+    - if @current_user.admin
       %a.btn.btn-primary.btn-mini{href:"#{users_url}",data:{remote:true}}
         %i.icon-list.icon-white
         목록

@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:userid])
 
     respond_to do |format|
       format.html{ render "_show" }
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(session[:userid])
     
     respond_to do |format|
       format.html{ render "_form"}

@@ -14,13 +14,12 @@
   = @user.password
 
 %hr
-- if @user.id==session[:userid] or @current_user.admin
-  .btn-group
+.btn-group
+  - if @user.id==session[:userid] or @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{edit_user_url(@user)}",data:{remote:true}}
       %i.icon-edit.icon-white
       수정
-- if @current_user.admin
-  .btn-group
+  - if @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{users_url}",data:{remote:true}}
       %i.icon-list.icon-white
       목록

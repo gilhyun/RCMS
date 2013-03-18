@@ -58,11 +58,17 @@
 
   .btn-group
     %a#fine-uploader-basic.btn.btn-primary.btn-mini
-      %i.icon-plus.icon-white
+      %i.icon-file.icon-white
       파일
+
+    %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
+      %i.icon-ok.icon-white
+      저장
+
+    %a.btn.btn-primary.btn-mini{href:"#{documents_url}" , data:{remote:true}}
+      %i.icon-list.icon-white
+      목록
   
-  = f.submit "저장" , remote:true , class:"btn btn-primary btn-mini"
-  = link_to "목록" , documents_path , remote:true , class:"btn btn-primary btn-mini"
 
 %br
 
