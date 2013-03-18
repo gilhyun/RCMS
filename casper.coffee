@@ -1,20 +1,20 @@
 
-casper= require('casper').create()
+casper= require('casper').create({verbosr:true, logLevel:"debug"})
 
-casper.start "http://localhost:3000/documents"
-
-casper.thenOpen "http://localhost:3000/sessions/new"
-
-casper.then ->
-  @fill "form[action='/sessions'", {name:"test", password:"test"} , true
-
-casper.thenClick "btn.btn-primary"
-
-#casper.then ->
-#  @echo "page url is #{@getCurrentUrl()}"
-#  @echo "page title is #{@getTitle()}"
-
-
-
+casper.start "http://localhost:3000/documents" , ->
+	
+	casper.waitForText("LOGIN") # login 페이지 대기 
+	casper.then ->
+		casper.sendKeys("#userid","test");
+		casper.sendKeys("#password","test");
+		casper.click("input[type='submit']")
+	
+	casper.waitForText("CATEGORIES")
+	casper.then ->
+		casper.click("#new-document")
+			
+	casper.waitForSelector("#document-content")
+	#casper.then ->
+	#	casper.capture 'output.png'
 
 casper.run()
