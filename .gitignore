@@ -18,4 +18,5 @@ pickle-email-*.html
 .project
 /upload-files/*
 /casperjs_test/*.png
+/casperjs_test/.DS_Store
 /.DS_Store
