@@ -19,7 +19,7 @@
         = link_to '', user, method:"delete", class:"icon-remove" , data: { confirm: "#{user.userid} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
 
 .btn-group
-  %a.btn.btn-primary.btn-mini{href:"#{new_user_url}",data:{remote:true}}
+  %a.btn.btn-primary.btn-mini{id:"add_new_user", href:"#{new_user_url}",data:{remote:true}}
     %i.icon-pencil.icon-white
     사용자 추가
 %br

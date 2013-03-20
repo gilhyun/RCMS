@@ -24,10 +24,9 @@
 
 - if @current_user
   .btn-group
-    %a.btn.btn-primary.btn-mini{id:"new-document" , href:"#{new_document_url(params:{category_id:@category.id})}",data:{remote:true}}
+    %a.btn.btn-primary.btn-mini{id:"new_document" , href:"#{new_document_url(params:{category_id:@category.id})}",data:{remote:true}}
       %i.icon-pencil.icon-white
       글쓰기
-  /= link_to '글쓰기', new_document_path , remote:true , class:"btn btn-primary btn-small pull-left"
 
 :javascript
   $(function(){

@@ -3,7 +3,7 @@
 -if flash[:alert]
   .alert.alert-error= flash[:alert]
 
-= form_tag sessions_path  do
+= form_tag sessions_path, id:"login_form"  do
   .field
     = label_tag "ID"
     /= text_field_tag :userid, params[:userid]
