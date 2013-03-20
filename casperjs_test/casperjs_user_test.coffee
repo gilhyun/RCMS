@@ -1,14 +1,17 @@
 casper= require('casper').create
+  verbose: true
+  safeLogs: true
   viewportSize:
     width:1024
     height:768
 
-casper.options.onWaitTimeout = -> exit 1
+casper.options.onWaitTimeout = ->
+  #casper.capture 'timeout.png'
+  exit 1
 
 # LOGIN
-casper.start "http://localhost:3000/users/new", ->
-  this.waitForText("LOGIN")
-  this.fill("form#login_form", {"userid": "admin","password": "admin"}, true)
+casper.start "http://railsdev71.herokuapp.com/users/new", ->
+  this.fill("form#login_form", {"userid": "admin","password": "admin2"}, true)
 
 # 사용자 목록
 casper.waitForSelector("#user_manage")
