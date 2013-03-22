@@ -3,14 +3,14 @@
 %table.table.table-hover
   %tr{align:"center"}
     %th NAME
-    %th DESC
+    %th.hidden-phone DESC
     %th 작업
 
   - @categories.each do |category|
     %tr
       %td
         = link_to "#{category.name}", category , remote:true
-      %td= category.description
+      %td.hidden-phone= category.description
       %td
         = link_to '', edit_category_path(category) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
         
@@ -21,8 +21,10 @@
     %i.icon-pencil.icon-white
     분류추가
 
-%br
 = paginate @categories , remote:true
+
+%br
+%br
 
 :javascript
   $(function(){

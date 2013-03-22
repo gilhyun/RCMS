@@ -3,17 +3,17 @@
 %table.table.table-hover
   %tr{align:"center"}
     %th{width:"55%"} 제목
-    %th{width:"15%"} 작성
-    %th{width:"15%"} 수정
-    %th{width:"15%"} 작업
+    %th.hidden-phone{id:"th1",width:"15%"} 작성
+    %th.hidden-phone{width:"15%"} 수정
+    %th.hidden-phone{width:"15%"} 작업
 
   - @documents.each do |document|
     %tr
       %td
         = link_to "#{document.title}", document , remote:true 
-      %td= document.user.userid
-      %td= document.updated_at.strftime("%Y%m%d")
-      %td
+      %td.hidden-phone{id:"td1"}= document.user.userid
+      %td.hidden-phone= document.updated_at.strftime("%Y%m%d")
+      %td.hidden-phone
         - if document.user.id==session[:userid] or @current_user.admin
         
           = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
@@ -27,6 +27,9 @@
     %a.btn.btn-primary.btn-mini{id:"new_document" , href:"#{new_document_url(params:{category_id:@category.id})}",data:{remote:true}}
       %i.icon-pencil.icon-white
       글쓰기
+
+%br
+%br
 
 :javascript
   $(function(){

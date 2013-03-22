@@ -20,6 +20,11 @@ RCMS::Application.routes.draw do
   root :to => "documents#index"
 
   
+  # routing error
+
+  match '*path', :to => 'page#routing_error'
+
+  
   #match 'documents/:id/attachfile_download' => "documents#attachfile_download"
 
 

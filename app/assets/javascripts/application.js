@@ -14,3 +14,12 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
+
+
+$(document).ajaxStart(function(){
+  $("#icon-loading").show();
+});
+
+$(document).ajaxComplete(function(){
+  $("#icon-loading").hide();
+});
