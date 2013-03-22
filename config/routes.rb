@@ -17,6 +17,8 @@ RCMS::Application.routes.draw do
     resources :comments
   end
 
+  root :to => "documents#index"
+
   
   #match 'documents/:id/attachfile_download' => "documents#attachfile_download"
 

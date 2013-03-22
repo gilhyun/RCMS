@@ -25,6 +25,9 @@
 
           = link_to "RCMS", documents_path , class:"brand"
 
+          = image_tag('loading-thumb.gif' , id:"icon-loading" , size:"25x25" , style:"margin-top: 5px;")
+          /%img{id:"icon-loading" , width:"15", height:"15" , style:"margin-top:5px;", src:"#{iamge_url('icon-thumb.gif')}"}
+
           = form_tag search_url(type:"all") , remote:true , class:"navbar-search pull-right" do
             %input.input-medium.search-query.pull-right#query{type:"text" , name:"query" , placeholder:"Search ..."}
 
