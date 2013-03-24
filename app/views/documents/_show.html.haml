@@ -8,7 +8,7 @@
 %small.muted.pull-left
   = @document.user.userid
   = @document.updated_at
-
+%br
 =# bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
 =# $('#file-lists').popover({ html : true });
 - if @document.attachfiles.size > 0
@@ -19,13 +19,11 @@
     
     - file_str << link_to("#{attachfile.filename}", action:'attachfile_download', params:{id:@document.id, attachfile_id:attachfile.id})
   %br
+
   %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
     첨부파일
 
-%br
-%hr
-
-.btn-group
+.btn-group.pull-left
   - if @document.user.id==session[:userid] or @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
       %i.icon-edit.icon-white
@@ -34,6 +32,9 @@
   %a.btn.btn-primary.btn-mini{href:"#{documents_url}",data:{remote:true}}
     %i.icon-list.icon-white
     목록
+
+%br
+%hr
 
 %h5
   = @document.content.html_safe

@@ -2,7 +2,7 @@
 -if @document
   
   -# counter_cache업데이트된 값을 위해 document를 다시 읽는다.
-  -doc=Document.find(@document)
+  -doc=@document#Document.find(@document)
 
   %h5= "#{doc.comments_count} Comments"
 

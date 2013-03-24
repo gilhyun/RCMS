@@ -3,12 +3,12 @@ RCMS::Application.routes.draw do
   match "attachfile-upload" => "documents#upload"
 
   match "search/:type" => "search#search" , :as => "search"
+
+  resources :categories
   
   resources :sessions
   
   resources :users
-
-  resources :categories
 
   resources :documents do
     member do
@@ -16,6 +16,8 @@ RCMS::Application.routes.draw do
     end
     resources :comments
   end
+
+
 
   root :to => "documents#index"
 
