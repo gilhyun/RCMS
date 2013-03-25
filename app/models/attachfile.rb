@@ -55,8 +55,13 @@ class Attachfile < ActiveRecord::Base
   		af=Attachfile.find(file_id)
       # db 삭제
   		af.destroy
+      
       # 실제 파일 삭제
-      FileUtils.rm_rf(File.join(@upload_base,document.id.to_s,af.id.to_s))
+      
+      # TDOD
+      # 아래 라인이 작동하면 upload 후 다시 다시 업로드 , 그리고 저장시 오류 발생..
+      #
+      #FileUtils.rm_rf(File.join(@upload_base,document.id.to_s,af.id.to_s))
   	end
   end
 

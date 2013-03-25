@@ -20,4 +20,8 @@ class Document < ActiveRecord::Base
     Document.includes(:category,:user,:attachfiles).find(params[:id])
   end
 
+  def to_param 
+    [id, title.parameterize.to_s].join("-")  # routing 에 영향을 주지 않는다.
+  end
+
 end

@@ -1,11 +1,14 @@
 %h4 사용자 리스트
 
 %table.table.table-hover
-  %tr{align:"center"}
-    %th 사용자ID
-    %th.hidden-phone EMAIL
-    %th 관리자
-    %th 작업
+  %thead
+    %tr{align:"center"}
+      %th 사용자ID
+      %th.hidden-phone EMAIL
+      %th 관리자
+      %th 작업
+
+  %tbody
 
   - @users.each do |user|
     %tr

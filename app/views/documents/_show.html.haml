@@ -20,7 +20,7 @@
     - file_str << link_to("#{attachfile.filename}", action:'attachfile_download', params:{id:@document.id, attachfile_id:attachfile.id})
   %br
 
-  %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"#", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
+  %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"javascript:", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
     첨부파일
 
 .btn-group.pull-left
@@ -66,7 +66,7 @@
   %input{type:"hidden" , name:"comment[version]" , value:"0"}
 
   .input-append
-    %input#comment.span6{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
+    %input.span6#comment{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
     %button.btn{type:"submit"} 저장
 
 

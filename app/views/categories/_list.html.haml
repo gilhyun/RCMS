@@ -1,13 +1,20 @@
 %h4 분류 리스트
 
 %table.table.table-hover
-  %tr{align:"center"}
-    %th NAME
-    %th.hidden-phone DESC
-    %th 작업
+  %thead
+    %tr{align:"center"}
+      %th{width:"5%"}
+        %input#chk_all{type:"checkbox"}
+      %th NAME
+      %th.hidden-phone DESC
+      %th 작업
+
+  %tbody
 
   - @categories.each do |category|
     %tr
+      %td
+        %input{id:"chk_category#{category.id}" ,type:"checkbox" , name:"category[#{category.id}]" , value:"#{category.id}"}
       %td
         = link_to "#{category.name}", category , remote:true
       %td.hidden-phone= category.description
@@ -25,9 +32,3 @@
 
 %br
 %br
-
-:javascript
-  $(function(){
-    $(".icon-edit").tooltip();
-    $(".icon-remove").tooltip();
-  })

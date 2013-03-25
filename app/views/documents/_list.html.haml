@@ -1,11 +1,14 @@
 %h4= @category.name
 
 %table.table.table-hover
-  %tr{align:"center"}
-    %th{width:"55%"} 제목
-    %th.hidden-phone{id:"th1",width:"15%"} 작성
-    %th.hidden-phone{width:"15%"} 수정
-    %th.hidden-phone{width:"15%"} 작업
+  %thead
+    %tr{align:"center"}
+      %th{width:"55%"} 제목
+      %th.hidden-phone{id:"th1",width:"15%"} 작성
+      %th.hidden-phone{width:"15%"} 수정
+      %th.hidden-phone{width:"15%"} 작업
+
+  %tbody
 
   - @documents.each do |document|
     %tr
