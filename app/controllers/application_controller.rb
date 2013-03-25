@@ -1,6 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  # I18n
+  before_filter :set_locale
+ 
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+  
+  def default_url_options(options={})
+    #logger.debug "default_url_options is passed options: #{options.inspect}\n"
+    { :locale => I18n.locale }
+  end
+
   
   #rescue_from Exception, :with => :render_500 # 혹은 do block
   #rescue_from ActiveRecord::RecordNotFound , :with => :render_404

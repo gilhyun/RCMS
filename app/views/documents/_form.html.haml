@@ -1,7 +1,7 @@
 .input-prepend
   .btn-group
     %button.btn.dropdown-toggle{data:{toggle:"dropdown"}}
-      분 류
+      =t :category
       %span.caret
     %ul.dropdown-menu
       -cs=Category.all
@@ -20,9 +20,9 @@
       - @document.errors.full_messages.each do |msg|
         %li.text-error= msg
 
-  = f.label "제목"
+  = f.label "#{t :title}"
   = f.text_field :title , class:"input-xxlarge"
-  = f.label "내용"
+  = f.label "#{t :content}"
   %textarea#document-content.input-xxlarge{name:"document[content]", rows:"15"}
     = @document.content
 
@@ -51,15 +51,15 @@
   .btn-group
     %a#fine-uploader-basic.btn.btn-primary.btn-mini
       %i.icon-file.icon-white
-      파일
+      =t :file
 
     %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
       %i.icon-ok.icon-white
-      저장
+      =t :save
 
     %a.btn.btn-primary.btn-mini{href:"#{documents_url}" , data:{remote:true}}
       %i.icon-list.icon-white
-      목록
+      =t :list
   
 
 %br

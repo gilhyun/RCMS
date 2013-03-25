@@ -3,6 +3,8 @@
 %table.table.table-hover
   %thead
     %tr{align:"center"}
+      %th{width:"5%"}
+        %input#chk_all{type:"checkbox"}
       %th 사용자ID
       %th.hidden-phone EMAIL
       %th 관리자
@@ -12,6 +14,8 @@
 
   - @users.each do |user|
     %tr
+      %td
+        %input{id:"chk_user#{user.id}" ,type:"checkbox" , name:"user[#{user.id}]" , value:"#{user.id}"}
       %td
         = link_to "#{user.userid}", user , remote:true
       %td.hidden-phone= user.email
@@ -30,10 +34,3 @@
 
 %br
 %br
-
-:javascript
-  $(function(){
-    $(".icon-play").tooltip();
-    $(".icon-edit").tooltip();
-    $(".icon-remove").tooltip();
-  })

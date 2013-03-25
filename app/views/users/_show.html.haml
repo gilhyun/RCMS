@@ -10,9 +10,9 @@
   %b Admin:
   = @user.admin
 %p
-  %b Password:
-  = @user.password
-
+  %b Update:
+  = @user.updated_at
+  
 %hr
 .btn-group
   - if @user.id==session[:userid] or @current_user.admin

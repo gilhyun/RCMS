@@ -3,10 +3,10 @@
 %table.table.table-hover
   %thead
     %tr{align:"center"}
-      %th{width:"55%"} 제목
-      %th.hidden-phone{id:"th1",width:"15%"} 작성
-      %th.hidden-phone{width:"15%"} 수정
-      %th.hidden-phone{width:"15%"} 작업
+      %th{width:"55%"}= t :title
+      %th.hidden-phone{id:"th1",width:"15%"}= t :author
+      %th.hidden-phone{width:"20%"}= t :updated_at
+      %th.hidden-phone{width:"10%"}= t :action
 
   %tbody
 
@@ -15,13 +15,13 @@
       %td
         = link_to "#{document.title}", document , remote:true 
       %td.hidden-phone{id:"td1"}= document.user.userid
-      %td.hidden-phone= document.updated_at.strftime("%Y%m%d")
+      %td.hidden-phone= l document.updated_at.localtime ,{format: :short}
       %td.hidden-phone
         - if document.user.id==session[:userid] or @current_user.admin
         
-          = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+          = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"#{t :edit}"}
         
-          = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
+          = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"top" , title:"#{t :delete}" }
 
 = paginate @documents , remote:true
 
@@ -29,7 +29,7 @@
   .btn-group
     %a.btn.btn-primary.btn-mini{id:"new_document" , href:"#{new_document_url(params:{category_id:@category.id})}",data:{remote:true}}
       %i.icon-pencil.icon-white
-      글쓰기
+      =t :new_document
 
 %br
 %br

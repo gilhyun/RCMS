@@ -13,9 +13,9 @@ class UsersController < ApplicationController
       # rendering이 생각보다 복잡해보인다.
       #
       format.html { render "_list"}
-      # js 응답이므로 ajax.js.coffee를 찾을것이다. 
-      # ajax.js.coffer를 다 적으면 deprecation warning이 로그에 나온다.
-      format.js{ render "ajax" , locals:{page:"list"} } 
+      # js 응답이므로 ajax.js.js.coffee를 찾을것이다. 
+      # ajax.js.js.coffer를 다 적으면 deprecation warning이 로그에 나온다.
+      format.js{ render "ajax.js" , locals:{page:"list"} } 
     end
   end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html{ render "_show" }
-      format.js{ render "ajax" , locals:{page:"show"} } 
+      format.js{ render "ajax.js" , locals:{page:"show"} } 
     end
 
   end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html{ render "_form"}
-      format.js{ render "ajax", locals:{page:"form"} } 
+      format.js{ render "ajax.js", locals:{page:"form"} } 
     end
   end
 
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       format.html{ render "_form"}
-      format.js{ render "ajax", locals:{page:"form"} } 
+      format.js{ render "ajax.js", locals:{page:"form"} } 
     end
   end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
         format.html { redirect_to users_path }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        format.js{ render "ajax", locals:{page:"form"} } 
+        format.js{ render "ajax.js", locals:{page:"form"} } 
       end
     end
   end
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
         format.html { redirect_to user_path(@user) }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        format.js{ render "ajax", locals:{page:"form"} } 
+        format.js{ render "ajax.js", locals:{page:"form"} } 
       end
     end
   end

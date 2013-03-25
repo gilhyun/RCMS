@@ -7,7 +7,10 @@
 
 %small.muted.pull-left
   = @document.user.userid
-  = @document.updated_at
+%small.muted.pull-right
+  = l @document.updated_at.localtime ,{format: :default}
+
+%br
 %br
 =# bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
 =# $('#file-lists').popover({ html : true });
@@ -18,20 +21,19 @@
     -file_url=File.join(download_path,@document.id.to_s,attachfile.id.to_s)
     
     - file_str << link_to("#{attachfile.filename}", action:'attachfile_download', params:{id:@document.id, attachfile_id:attachfile.id})
-  %br
 
   %a#file-lists.btn.btn-info.btn-mini.pull-right{href:"javascript:", data:{toggle:"popover", placement:"bottom" , content:"<p>#{file_str.join('</p><p>')}</p>" , title:"파일목록"}}
-    첨부파일
+    =t :file
 
 .btn-group.pull-left
   - if @document.user.id==session[:userid] or @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
       %i.icon-edit.icon-white
-      수정
+      =t :edit
 
   %a.btn.btn-primary.btn-mini{href:"#{documents_url}",data:{remote:true}}
     %i.icon-list.icon-white
-    목록
+    =t :list
 
 %br
 %hr
@@ -49,11 +51,11 @@
   - if @document.user.id==session[:userid] or @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{edit_document_url(@document)}",data:{remote:true}}
       %i.icon-edit.icon-white
-      수정
+      =t :edit
 
   %a.btn.btn-primary.btn-mini{href:"#{documents_url}",data:{remote:true}}
     %i.icon-list.icon-white
-    목록
+    =t :list
 
 
 =# Comment 추가 폼 
@@ -67,7 +69,8 @@
 
   .input-append
     %input.span6#comment{type:"text", name:"comment[content]" , placeholder:"Comment ... "}
-    %button.btn{type:"submit"} 저장
+    %button.btn{type:"submit"}
+      =t :save
 
 
 
