@@ -4,8 +4,13 @@
   CATEGORIES
 %li.divider
 
-- categories.each do |category|
-  %li
-    %a{href:"#{documents_url(params:{category_id:category.id})}", data:{remote:true}}
-      = "#{category.name}"
+%table
+  - categories.each do |category|
+    %tr
+      %td{width:"70%"}
+        %li
+          %a.push-left{href:"#{documents_url(params:{category_id:category.id})}", data:{remote:true}}
+            = "#{category.name}"
+      %td{width:"30%", align:"right"}
+        %small.label= category.documents_count
 

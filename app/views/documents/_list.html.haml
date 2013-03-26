@@ -2,9 +2,10 @@
 
 %table.table.table-hover
   %thead
-    %tr{align:"center"}
-      %th{width:"55%"}= t :title
-      %th.hidden-phone{id:"th1",width:"15%"}= t :author
+    %tr
+      %th{width:"50%"}= t :title
+      %th.hidden-phone{width:"15%"}= t :author
+      %th{width:"5%"} Comments
       %th.hidden-phone{width:"20%"}= t :updated_at
       %th.hidden-phone{width:"10%"}= t :action
 
@@ -14,7 +15,8 @@
     %tr
       %td
         = link_to "#{document.title}", document , remote:true 
-      %td.hidden-phone{id:"td1"}= document.user.userid
+      %td.hidden-phone= document.user.userid
+      %td{align:"right"}= document.comments_count
       %td.hidden-phone= l document.updated_at.localtime ,{format: :short}
       %td.hidden-phone
         - if document.user.id==session[:userid] or @current_user.admin

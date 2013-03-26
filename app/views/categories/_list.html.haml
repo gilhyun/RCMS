@@ -6,6 +6,7 @@
       %th{width:"5%"}
         %input#chk_all{type:"checkbox"}
       %th NAME
+      %th DOCS
       %th.hidden-phone DESC
       %th 작업
 
@@ -17,6 +18,7 @@
         %input{id:"chk_category#{category.id}" ,type:"checkbox" , name:"category[#{category.id}]" , value:"#{category.id}"}
       %td
         = link_to "#{category.name}", category , remote:true
+      %td= category.documents_count
       %td.hidden-phone= category.description
       %td
         = link_to '', edit_category_path(category) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
