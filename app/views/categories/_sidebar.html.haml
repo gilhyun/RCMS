@@ -11,6 +11,6 @@
         %li
           %a.push-left{href:"#{documents_url(params:{category_id:category.id})}", data:{remote:true}}
             = "#{category.name}"
-      %td{width:"30%", align:"right"}
-        %small.label= category.documents_count
+      %td{width:"10%"}
+        %small.pull-right.label= category.documents_count
 

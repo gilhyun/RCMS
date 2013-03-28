@@ -1,0 +1,23 @@
+%h4= "#{@users.total_count}건이 검색되었습니다."
+
+%table.table.table-hover
+  %tr{align:"center"}
+    %th{width:"5%"}
+      %input#chk_all{type:"checkbox"}
+    %th{width:"45%"} ID
+    %th{width:"25%"} EMAIL
+    %th{width:"25%"} UPDATE
+
+  - @users.each do |user|
+    %tr
+      %td
+        %input{id:"chk_user#{user.id}" ,type:"checkbox" , name:"user[#{user.id}]" , value:"#{user.id}"}
+      %td
+        = link_to "#{user.userid}", user , remote:true 
+
+      %td= user.email
+
+      %td= user.updated_at.strftime("%Y%m%d")
+
+= paginate @users , remote:true
+

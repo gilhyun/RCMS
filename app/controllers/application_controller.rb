@@ -2,7 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   # I18n
-  before_filter :set_locale
+  before_filter :set_locale , :search_options
+
+  def search_options
+    {list_per: 10 , search_per: 10}
+  end
  
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale

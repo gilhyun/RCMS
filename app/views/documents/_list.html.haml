@@ -16,7 +16,7 @@
       %td
         = link_to "#{document.title}", document , remote:true 
       %td.hidden-phone= document.user.userid
-      %td{align:"right"}= document.comments_count
+      %td= document.comments_count
       %td.hidden-phone= l document.updated_at.localtime ,{format: :short}
       %td.hidden-phone
         - if document.user.id==session[:userid] or @current_user.admin

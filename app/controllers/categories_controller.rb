@@ -3,7 +3,10 @@ class CategoriesController < ApplicationController
 	before_filter :current_user
   
   def index
-    @categories = Category.order("name desc").page(params[:page])
+
+    session[:search]="category"
+    
+    @categories = Category.order("name desc").page(params[:page]).per(search_options[:list_per])
 
     respond_to do |format|
 

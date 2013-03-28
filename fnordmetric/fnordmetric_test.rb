@@ -1,20 +1,28 @@
 require 'net/http'
 require 'json'
 
-start=Time.now
+begin
 
-url = "http://localhost:4242"
-uri = URI.parse(url)
-data = { "_type"=>"_incr", "value"=> 1, "gauge"=> "sales_per_minute" }.to_json
+  start=Time.now
 
-headers = {"Content-Type" => "application/json"}
+  url = "http://localhost:4242"
+  uri = URI.parse(url)
+  data = { "_type"=>"_incr", "value"=> 1, "gauge"=> "sales_per_minute" }.to_json
 
-net = Net::HTTP.new(uri.host,uri.port)   # Creates a http object
-request = Net::HTTP::Post.new("/events", initheader=headers)
-request.body=data
+  headers = {"Content-Type" => "application/json"}
 
-response=net.start do |http|
-  http.request(request)
+  net = Net::HTTP.new(uri.host,uri.port)   # Creates a http object
+  request = Net::HTTP::Post.new("/events", initheader=headers)
+  request.body=data
+
+  response=net.start do |http|
+    http.request(request)
+  end
+
+  puts "working time : #{Time.now-start}"
+
+rescue => e
+  puts e.message
+  #puts e.backtrace
 end
 
-puts "working time : #{Time.now-start}"

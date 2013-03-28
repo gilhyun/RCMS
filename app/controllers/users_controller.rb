@@ -3,7 +3,10 @@ class UsersController < ApplicationController
   before_filter :current_user
   
   def index
-    @users = User.order("updated_at desc").page(params[:page])
+
+    session[:search]="user"
+
+    @users = User.order("updated_at desc").page(params[:page]).per(search_options[:list_per])
 
     respond_to do |format|
 

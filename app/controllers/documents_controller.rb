@@ -4,6 +4,8 @@ class DocumentsController < ApplicationController
   
   def index
 
+    session[:search]="document"
+
     unless params[:category_id]
       @category=Category.first 
     else
@@ -20,20 +22,45 @@ class DocumentsController < ApplicationController
       # rendering이 생각보다 복잡해보인다.
       #
       format.html { render "_list"}
-      # js 응답이므로 ajax.js.coffee를 찾을것이다. 
-      # ajax.js.coffer를 다 적으면 deprecation warning이 로그에 나온다.
-      format.js{ render "ajax" , locals:{page:"list"} } 
+      # js 응답이므로 ajax.js.js.coffee를 찾을것이다. 
+      # ajax.js.js.coffer를 다 적으면 deprecation warning이 로그에 나온다.
+      format.js{ render "ajax.js" , locals:{page:"list"} } 
     end
   end
+
+  def admin_index
+
+    session[:search]="admin_document"
+
+    @documents=Document.includes(:category,:user).all
+
+    @documents=Kaminari.paginate_array(@documents).page(params[:page]).per(search_options[:list_per])
+
+
+    respond_to do |format|
+      format.js{ render "ajax.js", locals:{page:"admin/documents/list"}}
+    end
+  end
+
 
   def show
     @document=Document.show(params)
 
     respond_to do |format|
-      format.html{ render "_show" }
-      format.js{ render "ajax" , locals:{page:"show"} } 
+      #format.html{ render "_show" }
+      format.js{ render "ajax.js" , locals:{page:"show"} } 
     end
 
+  end
+
+  # admin 에서 조회시 bootstrap modal 사용시 호출되는 액션 
+  def modal_show
+    @document=Document.show(params)
+
+    respond_to do |format|
+      #format.html{ render "_show" }
+      format.js{ render "modal_show.js" }
+    end 
   end
 
   def new
@@ -46,7 +73,7 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       format.html{ render "_form"}
-      format.js{ render "ajax", locals:{page:"form"} } 
+      format.js{ render "ajax.js", locals:{page:"form"} } 
     end
   end
 
@@ -55,7 +82,7 @@ class DocumentsController < ApplicationController
     
     respond_to do |format|
       format.html{ render "_form"}
-      format.js{ render "ajax", locals:{page:"form"} } 
+      format.js{ render "ajax.js", locals:{page:"form"} } 
     end
   end
 
@@ -77,7 +104,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to documents_path }
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        format.js{ render "ajax", locals:{page:"form"} } 
+        format.js{ render "ajax.js", locals:{page:"form"} } 
       end
     end
   end
@@ -97,7 +124,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to documents_path}
       else
         # render "_form"으로 렌더링하면 error message가 표시가 안된다.
-        format.js{ render "ajax", locals:{page:"form"} } 
+        format.js{ render "ajax.js", locals:{page:"form"} } 
       end
     end
   end
@@ -113,7 +140,7 @@ class DocumentsController < ApplicationController
 
       #방법2 - 삭제후 페이지 번호를 누르면 show action으로 처리된다.. - > 원인이 뭐지 ??
       #@documents = Document.list_updated(params[:page])
-      #format.js{ render "ajax", locals:{page:"list"} } 
+      #format.js{ render "ajax.js", locals:{page:"list"} } 
       
       #방법3 - 제일 무난한 방법인것 같다.
       format.all{ redirect_to documents_path}

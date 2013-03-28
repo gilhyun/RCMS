@@ -1,13 +1,10 @@
 
 -if @document
   
-  -# counter_cache업데이트된 값을 위해 document를 다시 읽는다.
-  -doc=@document#Document.find(@document)
+  - comments=@document.comments.list_updated(params[:comments_page])
 
-  %h5= "#{doc.comments_count} Comments"
-
-  - comments=doc.comments.list_updated(params[:comments_page])
-
+  %h5= "#{comments.size} Comments"
+  
   - comments.each do |comment|
 
     %hr
@@ -22,9 +19,9 @@
         
         - if comment.user_id==session[:userid] or @current_user.admin
 
-          = link_to '', edit_document_comment_path(doc,comment) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+          = link_to '', edit_document_comment_path(@document,comment) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
 
-          = link_to '', [doc,comment] , method:"delete" ,  class:"icon-remove", data:{ confirm: "삭제 하시겠습니까?", toggle:"tooltip" , placement:"top" , title:"삭제"}
+          = link_to '', [@document,comment] , method:"delete" ,  class:"icon-remove", data:{ confirm: "삭제 하시겠습니까?", toggle:"tooltip" , placement:"top" , title:"삭제"}
 
   %br
   %br

@@ -26,7 +26,6 @@
 
           %span
             = image_tag('loading-thumb.gif' , id:"icon-loading" , size:"25x25" , style:"margin-top: 10px;display:none;")
-          /%img{id:"icon-loading" , width:"15", height:"15" , style:"margin-top:5px;", src:"#{iamge_url('icon-thumb.gif')}"}
 
           /phone 에서는 안보인다.
           = form_tag search_url(type:"all") , remote:true , class:"navbar-search pull-right hidden-phone" do

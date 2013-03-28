@@ -4,6 +4,10 @@ RCMS::Application.routes.draw do
 
   match "search/:type" => "search#search" , :as => "search"
 
+  match "admin/list" => "documents#admin_index" , :as => "admin_list"
+
+  match "modal-show/:id" => "documents#modal_show" , :as => "modal_show"
+
   resources :categories
   
   resources :sessions

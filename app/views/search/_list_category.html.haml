@@ -1,0 +1,21 @@
+%h4= "#{@categories.total_count}건이 검색되었습니다."
+
+%table.table.table-hover
+  %tr{align:"center"}
+    %th{width:"5%"}
+      %input#chk_all{type:"checkbox"}
+    %th{width:"60%"} NAME
+    %th{width:"20"} DOCS
+    %th{width:"15%"} DESC
+
+  - @categories.each do |category|
+    %tr
+      %td
+        %input{id:"chk_category#{category.id}" ,type:"checkbox" , name:"category[#{category.id}]" , value:"#{category.id}"}
+      %td
+        = link_to "#{category.name}", category , remote:true 
+      %td= category.documents_count
+      %td= category.updated_at.strftime("%Y%m%d")
+
+= paginate @categories , remote:true
+
