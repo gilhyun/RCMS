@@ -6,19 +6,21 @@
 -else
 
   %table.table.table-hover
-    %tr{align:"center"}
-      %th{width:"85%"}= t :title
-      %th{width:"15%"} Date
+    %thead
+      %tr{align:"center"}
+        %th{width:"85%"}= t :title
+        %th{width:"15%"} Date
 
-    - @documents.each do |document|
-      %tr
-        %td
-          %p
-            %small.muted
-              = document.category.name
-          = link_to "#{document.title}", document , remote:true 
+    %tbody
+      - @documents.each do |document|
+        %tr
+          %td
+            %p
+              %small.muted
+                = document.category.name
+            = link_to "#{document.title}", document , remote:true 
 
-        %td= document.updated_at.strftime("%Y%m%d")
+          %td= document.updated_at.strftime("%Y%m%d")
 
   = paginate @documents , remote:true
 

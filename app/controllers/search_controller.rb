@@ -10,14 +10,16 @@ class SearchController < ApplicationController
 
 	  logger.debug "session : #{session[:search]}"
 
-	  if session[:search]=="document"
-	  	document_search(query)
+	  if session[:search]=="tags" || params[:search_option]=="tags"
+      document_tag_search(query)
 	  elsif session[:search]=="admin_document"
 	  	document_admin_search(query)
 	  elsif session[:search]=="user"
 	  	user_search(query)
 	  elsif session[:search]=="category"
 	  	category_search(query)
+    elsif session[:search]=="document"
+      document_search(query)
 		end
 
 	end
@@ -28,6 +30,14 @@ private
 		@documents = Document.find(:all, :conditions=> ["title like ? or content like ?",  "%#{query}%", "%#{query}%"])
 		@documents=Kaminari.paginate_array(@documents).page(params[:page]).per(search_options[:search_per])
 		respond_to do |format|
+      format.js{ render "ajax.js" , locals:{page:"list"} } 
+    end
+  end
+
+  def document_tag_search(query)
+    @documents=Document.includes(:category, :tags).where("tags.name=?",query)
+    @documents=Kaminari.paginate_array(@documents).page(params[:page]).per(search_options[:search_per])
+    respond_to do |format|
       format.js{ render "ajax.js" , locals:{page:"list"} } 
     end
   end

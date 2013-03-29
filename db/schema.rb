@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130326123156) do
+ActiveRecord::Schema.define(:version => 20130329141643) do
 
   create_table "attachfiles", :force => true do |t|
     t.integer  "document_id", :null => false
@@ -52,7 +52,17 @@ ActiveRecord::Schema.define(:version => 20130326123156) do
     t.datetime "updated_at",                        :null => false
     t.integer  "comments_count", :default => 0
     t.integer  "category_id",                       :null => false
+    t.integer  "tag_id"
   end
+
+  create_table "tags", :force => true do |t|
+    t.integer  "document_id"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
   create_table "tmpfiles", :force => true do |t|
     t.string   "ufilename",  :null => false

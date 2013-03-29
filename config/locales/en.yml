@@ -35,6 +35,7 @@ en:
   comment: "Reply"
   doc_count: "Doc Total"
   no_result: "No Result Found.."
+  tag_input_msg: "type tags seperated by comma(,)"
 
   activerecord:
     attributes:

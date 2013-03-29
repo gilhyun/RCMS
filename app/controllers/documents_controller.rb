@@ -45,6 +45,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document=Document.show(params)
+    @tags=@document.tags
 
     respond_to do |format|
       #format.html{ render "_show" }
@@ -79,6 +80,7 @@ class DocumentsController < ApplicationController
 
   def edit
     @document = Document.show(params)
+    @tags=@document.tags
     
     respond_to do |format|
       format.html{ render "_form"}
@@ -99,6 +101,8 @@ class DocumentsController < ApplicationController
     respond_to do |format|
       if @document.save
 
+        update_tags(@document,params[:tags])
+
         # 유저가 추가한 첨부파일 
         Attachfile.save_files(@document,params["time-token"])
         format.html { redirect_to documents_path }
@@ -114,6 +118,8 @@ class DocumentsController < ApplicationController
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
+
+        update_tags(@document,params[:tags])
 
         # 신규추가된 upload file
         Attachfile.save_files(@document,params["time-token"])
@@ -173,4 +179,19 @@ class DocumentsController < ApplicationController
     finfo=Attachfile.download_filename(params)
     send_file(finfo[0], filename:"#{finfo[1]}" , disposition:'attachment')
   end
+
+  def update_tags(document,tags)
+    # 기존에 있는 태그를 다 지우고 넘어온 값으로 새로이 만든다.
+    document.tags.delete_all
+
+    #tag 추가
+    if tags
+      arr=tags.split(",")
+      arr.each do |tag|
+        tg=document.tags.new({document_id: document.id , name:"#{tag.strip}"})
+        tg.save
+      end
+    end
+  end
+
 end

@@ -35,6 +35,7 @@ ko:
   comment: "Reply"
   doc_count: "문서갯수"
   no_result: "검색 결과가 없습니다.."
+  tag_input_msg: "comma(,)로 구분해서 입력하세요."
 
   activerecord:
     attributes:

@@ -21,13 +21,18 @@
         %li.text-error= msg
 
   = f.label "#{t :title}"
-  = f.text_field :title , class:"input-xxlarge"
+  .input-append
+    %input{type:"text",class:"input-xxlarge",name:"document[title]",id:"document_title",value:"#{@document.title}"}
+
+    / tag 처리
+    - tag_names=[] unless @tags
+    - tag_names = @tags.collect{|tag| tag.name} if @tags
+    - tag_html="<textarea type='text' name='tags' cols='20', rows='3'>#{tag_names.join(',')}</textarea>"
+    %a#tag_lists.btn.btn-info{href:"javascript:", data:{toggle:"popover", placement:"bottom" , content:"<p>#{tag_html}</p>" , title:"TAG LIST<p><small>#{t :tag_input_msg}</small></p>"}}
+      TAGS
 
   %br
-  - tag_html="<input type='text' name='aaa' class='input-xxlarge' value='ㅏㄴ글이이이이임aaaaa' />"
-  %a#tag_lists.btn.btn-info.btn-mini{href:"javascript:", data:{toggle:"popover", placement:"bottom" , content:"<p>tag#{tag_html}</p>" , title:"TAG LIST"}}
-    태그
-
+  
   = f.label "#{t :content}"
   %textarea#document-content.input-xxlarge{name:"document[content]", rows:"20"}
     = @document.content

@@ -1,12 +1,14 @@
 # encoding: utf-8
 class Document < ActiveRecord::Base
 
-  attr_accessible :title , :content , :user_id , :category_id
+  attr_accessible :title , :content , :user_id , :category_id , :tag_id
 
   belongs_to :user
   belongs_to :category , counter_cache:true
   has_many :attachfiles , dependent: :destroy
   has_many :comments , dependent: :destroy
+
+  has_many :tags
 
   validates_presence_of :title , :user_id , :category_id , message:" 을(를)입력해야 합니다."
 

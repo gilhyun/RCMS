@@ -2,6 +2,13 @@
 
 %h6= @document.category.name
 
+=# tag list
+- if @tags.size > 0
+  %small.pull-right
+    TAGS:
+    - @tags.each do |tag|
+      %i
+        = link_to "#{tag.name}" , search_path(type:"all",query:"#{tag.name}",search_option:"tags") , remote:true
 %h4
   = @document.title
 
@@ -9,8 +16,8 @@
   = @document.user.userid
 %small.muted.pull-right
   = l @document.updated_at.localtime ,{format: :default}
-
 %br
+
 %br
 =# bootstrap popover 이용 - data-content에서 html을 사용하기 위해 아래와 같이 한다.
 =# $('#file-lists').popover({ html : true });
@@ -84,6 +91,10 @@
 %br
 
 :javascript
+  function search_documents(query){
+    alert(query);
+  }
+
   $(function(){
     $('#file-lists').popover({ html : true });
   });
