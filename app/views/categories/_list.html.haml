@@ -1,14 +1,14 @@
-%h4 분류 리스트
+%h4= t :category_list
 
 %table.table.table-hover
   %thead
     %tr{align:"center"}
       %th{width:"5%"}
         %input#chk_all{type:"checkbox"}
-      %th NAME
-      %th DOCS
-      %th.hidden-phone DESC
-      %th 작업
+      %th= t :name
+      %th= t :doc_count
+      %th.hidden-phone= t :desc
+      %th= t :edit
 
   %tbody
 
@@ -21,14 +21,14 @@
       %td= category.documents_count
       %td.hidden-phone= category.description
       %td
-        = link_to '', edit_category_path(category) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"수정"}
+        = link_to '', edit_category_path(category) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"#{t :edit}"}
         
-        = link_to '', category, method:"delete", class:"icon-remove" , data: { confirm: "#{category.name} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"right" , title:"삭제" }
+        = link_to '', category, method:"delete", class:"icon-remove" , data: { confirm: "#{t :delete_msg , data: category.name }" ,toggle:"tooltip" , placement:"right" , title:"#{t :delete}" }
 
 .btn-group
   %a.btn.btn-primary.btn-mini{href:"#{new_category_url}",data:{remote:true}}
     %i.icon-pencil.icon-white
-    분류추가
+    = t :add_category
 
 = paginate @categories , remote:true
 

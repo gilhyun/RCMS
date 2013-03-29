@@ -15,6 +15,27 @@ en:
   category: "Category"
   content: "text"
 
+  email: "Email"
+  user_list: "User List"
+  category_list: "Category List"
+  document_list: "Document List"
+  add_user: "Add User"
+  add_category: "Add Category"
+  userid: "ID"
+  admin: "Admin"
+  user_mng: "User Manager"
+  category_mng: "Category Manager"
+  document_mng: "Document Manager"
+  user_info: "My Info"
+  delete_msg: "%{data} will be deleted !"
+  cancel: "Cancel"
+  search_result: "Results : %{search_count}"
+  name: "Name"
+  desc: "Desc"
+  comment: "Reply"
+  doc_count: "Doc Total"
+  no_result: "No Result Found.."
+
   activerecord:
     attributes:
       user:

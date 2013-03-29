@@ -57,7 +57,7 @@
                     %li.divider
                     %li
                       %a{href:"#{edit_user_url(@current_user)}"}
-                        정보수정
+                        = t :user_info
                     %li
                       %a{href:"#{new_session_path(params:{cmd:'logout'})}"}
                         LOGOUT

@@ -1,19 +1,24 @@
-%h4= "#{@documents.total_count}건이 검색되었습니다."
+%h4= t :search_result , search_count:@documents.total_count
 
-%table.table.table-hover
-  %tr{align:"center"}
-    %th{width:"85%"} 제목
-    %th{width:"15%"} 날짜
+- if @documents.total_count==0
+  %hr
+  =t :no_result
+-else
 
-  - @documents.each do |document|
-    %tr
-      %td
-        %p
-          %small.muted
-            = document.category.name
-        = link_to "#{document.title}", document , remote:true 
+  %table.table.table-hover
+    %tr{align:"center"}
+      %th{width:"85%"}= t :title
+      %th{width:"15%"} Date
 
-      %td= document.updated_at.strftime("%Y%m%d")
+    - @documents.each do |document|
+      %tr
+        %td
+          %p
+            %small.muted
+              = document.category.name
+          = link_to "#{document.title}", document , remote:true 
 
-= paginate @documents , remote:true
+        %td= document.updated_at.strftime("%Y%m%d")
+
+  = paginate @documents , remote:true
 

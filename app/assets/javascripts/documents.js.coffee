@@ -8,3 +8,7 @@
 //= require ./upload/uploader.basic
 //= require_directory ./upload
 //= require bootstrap-wysihtml5
+
+$ ->
+  #html을 해석하게 한다.
+  $('#tag_lists').popover({ html : true });

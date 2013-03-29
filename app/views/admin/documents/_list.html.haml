@@ -1,34 +1,39 @@
-%h4 문서 리스트
+%h4= t :document_list
 
-%table.table.table-hover
-  %thead
-    %tr
-      %th{width:"5%"}
-        %input#chk_all{type:"checkbox"}
-      %th{width:"20%"} 분류
-      %th{width:"40%"}= t :title
-      %th.hidden-phone{width:"10%"}= t :author
-      %th{width:"5%"} Cmts.
-      %th.hidden-phone{width:"20%"}= t :updated_at
+- if @documents.size==0
+  %hr
+  =t :no_result
+-else
 
-  %tbody
+  %table.table.table-hover
+    %thead
+      %tr
+        %th{width:"5%"}
+          %input#chk_all{type:"checkbox"}
+        %th{width:"20%"}= t :category
+        %th{width:"40%"}= t :title
+        %th.hidden-phone{width:"10%"}= t :author
+        %th{width:"5%"}= t :comment
+        %th.hidden-phone{width:"20%"}= t :updated_at
 
-  - @documents.each do |document|
-    %tr
-      %td
-        %input{id:"chk_document#{document.id}" ,type:"checkbox" , name:"document[#{document.id}]" , value:"#{document.id}"}
-      %td= document.category.name
-      %td
-        = link_to "#{document.title}", modal_show_path(document) , remote:true 
-          
-      %td.hidden-phone= document.user.userid
-      %td{align:"right"}= document.comments_count
-      %td.hidden-phone= l document.updated_at.localtime ,{format: :short}
+    %tbody
+
+    - @documents.each do |document|
+      %tr
+        %td
+          %input{id:"chk_document#{document.id}" ,type:"checkbox" , name:"document[#{document.id}]" , value:"#{document.id}"}
+        %td= document.category.name
+        %td
+          = link_to "#{document.title}", modal_show_path(document) , remote:true 
+            
+        %td.hidden-phone= document.user.userid
+        %td{align:"right"}= document.comments_count
+        %td.hidden-phone= l document.updated_at.localtime ,{format: :short}
 
 
-= paginate @documents , remote:true
+  = paginate @documents , remote:true
 
-%br
-%br
+  %br
+  %br
 
-#view
+  #view

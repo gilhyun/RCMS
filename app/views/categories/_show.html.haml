@@ -15,9 +15,9 @@
   - if @current_user.id==session[:userid] or @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{edit_category_url(@category)}" , data:{remote:true}}
       %i.icon-edit.icon-white
-      수정
+      = t :edit
 
   - if @current_user.admin
     %a.btn.btn-primary.btn-mini{href:"#{categories_url}",data:{remote:true}}
       %i.icon-list.icon-white
-      목록
+      = t :list

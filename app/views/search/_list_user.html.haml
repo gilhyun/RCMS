@@ -1,23 +1,28 @@
-%h4= "#{@users.total_count}건이 검색되었습니다."
+%h4= t :search_result , search_count:@users.total_count
 
-%table.table.table-hover
-  %tr{align:"center"}
-    %th{width:"5%"}
-      %input#chk_all{type:"checkbox"}
-    %th{width:"45%"} ID
-    %th{width:"25%"} EMAIL
-    %th{width:"25%"} UPDATE
+-if @users.total_count==0
+  %hr
+  =t :no_result
+-else
 
-  - @users.each do |user|
-    %tr
-      %td
-        %input{id:"chk_user#{user.id}" ,type:"checkbox" , name:"user[#{user.id}]" , value:"#{user.id}"}
-      %td
-        = link_to "#{user.userid}", user , remote:true 
+  %table.table.table-hover
+    %tr{align:"center"}
+      %th{width:"5%"}
+        %input#chk_all{type:"checkbox"}
+      %th{width:"45%"} ID
+      %th{width:"25%"} EMAIL
+      %th{width:"25%"} UPDATE
 
-      %td= user.email
+    - @users.each do |user|
+      %tr
+        %td
+          %input{id:"chk_user#{user.id}" ,type:"checkbox" , name:"user[#{user.id}]" , value:"#{user.id}"}
+        %td
+          = link_to "#{user.userid}", user , remote:true 
 
-      %td= user.updated_at.strftime("%Y%m%d")
+        %td= user.email
 
-= paginate @users , remote:true
+        %td= user.updated_at.strftime("%Y%m%d")
+
+  = paginate @users , remote:true
 

@@ -20,3 +20,10 @@ $ ->
       # $(elem).prop("checked",false) for elem in $("input[id^=chk_user]")
 
 <% end %>
+
+<% if page=="form" %>
+
+$ ->
+  $("#user_userid").focus()
+
+<% end %>

@@ -5,9 +5,9 @@
     %tr
       %th{width:"50%"}= t :title
       %th.hidden-phone{width:"15%"}= t :author
-      %th{width:"5%"} Comments
+      %th{width:"5%"}= t :comment
       %th.hidden-phone{width:"20%"}= t :updated_at
-      %th.hidden-phone{width:"10%"}= t :action
+      %th.hidden-phone{width:"10%"}= t :edit
 
   %tbody
 
@@ -23,7 +23,7 @@
         
           = link_to '', edit_document_path(document) , remote:true , class:"icon-edit", data:{ toggle:"tooltip" , placement:"top" , title:"#{t :edit}"}
         
-          = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{document.title} 삭제 하시겠습니까?" ,toggle:"tooltip" , placement:"top" , title:"#{t :delete}" }
+          = link_to '', document, method:"delete" , class:"icon-remove" , data: { confirm: "#{t :delete_msg , data: document.title}" ,toggle:"tooltip" , placement:"top" , title:"#{t :delete}" }
 
 = paginate @documents , remote:true
 

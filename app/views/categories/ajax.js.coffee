@@ -21,3 +21,10 @@ $ ->
       # $(elem).prop("checked",false) for elem in $("input[id^=chk_category]")
 
 <% end %>
+
+<% if page=="form" %>
+
+$ ->
+  $("#category_name").focus()
+
+<% end %>

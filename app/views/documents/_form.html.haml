@@ -22,8 +22,14 @@
 
   = f.label "#{t :title}"
   = f.text_field :title , class:"input-xxlarge"
+
+  %br
+  - tag_html="<input type='text' name='aaa' class='input-xxlarge' value='ㅏㄴ글이이이이임aaaaa' />"
+  %a#tag_lists.btn.btn-info.btn-mini{href:"javascript:", data:{toggle:"popover", placement:"bottom" , content:"<p>tag#{tag_html}</p>" , title:"TAG LIST"}}
+    태그
+
   = f.label "#{t :content}"
-  %textarea#document-content.input-xxlarge{name:"document[content]", rows:"15"}
+  %textarea#document-content.input-xxlarge{name:"document[content]", rows:"20"}
     = @document.content
 
   
@@ -82,11 +88,8 @@
 
    $(function(){
 
-     $("#document_title").focus();
-
-     $('#document-content').wysihtml5();
-
-
+      $('#document-content').wysihtml5();
+      $("#document_title").focus();
 
     var fub = $('#fine-uploader-basic');
     var messages = $('#messages');

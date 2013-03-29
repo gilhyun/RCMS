@@ -16,10 +16,10 @@
     - if @current_user.id==session[:userid] or @current_user.admin
       %button.btn.btn-primary.btn-mini{type:"submit" , data:{remote:true}}
         %i.icon-edit.icon-white
-        저장
+        = t :save
               
     - if @current_user.admin
       %a.btn.btn-primary.btn-mini{href:"#{categories_url}",data:{remote:true}}
         %i.icon-list.icon-white
-        목록
+        = t :list
   
